@@ -261,3 +261,19 @@ body:has(.game-menu) .modal-backdrop{z-index:260}
 .lb-rank{width:34px;text-align:center;font-size:22px}
 .lb-who{flex:1;display:flex;flex-direction:column;font-size:18px}.lb-who small{font-family:Inter,system-ui,sans-serif;font-size:12px;color:#6b4423}
 .lb-rating{font-size:24px;font-weight:400;color:#3b1d0e}
+
+/* Home menu: show the signed-in wallet (address + sign out via the wallet dialog) top-right, above the menu. */
+body:has(.game-menu) .site-header{position:fixed;inset:0 0 auto 0;z-index:240;background:transparent!important;pointer-events:none}
+body:has(.game-menu) .site-header .header-right{position:static;pointer-events:auto}
+body:has(.game-menu) .brand-lockup{display:none!important}
+body:has(.game-menu) .modal-backdrop{z-index:260}
+.wallet-button{width:auto!important;min-width:46px;padding:0 12px!important;gap:6px;font-family:"Lilita One",system-ui,sans-serif;font-size:15px;letter-spacing:.02em;text-shadow:0 2px 0 #3b1d0e}
+.wallet-button span{display:inline!important}
+/* Readability on the vault, deposit, arena, pool and withdraw pages: plain readable text on small buttons, no overflow. */
+.legacy-main{max-width:min(1000px,100vw)!important;overflow-x:hidden}
+.card{max-width:100%;box-sizing:border-box;overflow-wrap:anywhere}
+.legacy-main .tx button,.legacy-main button:not(.primary-button):not(.subtle-button):not(.round-button):not(.text-button):not(.ghost){font-size:16px!important;text-shadow:0 1px 0 #3b1d0e!important;padding:10px 16px}
+.legacy-main .tx button:disabled{color:#5a2e12!important;text-shadow:none!important;opacity:.6}
+.card button.ghost,.card .ghost{background:#fffaf0!important;color:#3b1d0e!important;border:3px solid #3b1d0e!important;border-radius:12px!important;box-shadow:0 3px 0 #3b1d0e!important;font-family:Inter,system-ui,sans-serif!important;text-shadow:none!important}
+.card select{min-width:120px;padding:8px 10px}
+.card label{color:#3b1d0e}
