@@ -21,7 +21,9 @@ export function useDecks() {
     const d = r[0];
     return { id, tier: Number(d?.tier ?? 0), asset: Number(d?.asset ?? 0), principal: d?.principal ?? 0n, valueUsd: d?.depositValueUsd ?? 0n, retired: !!d?.retired, available: r[1] ?? 0n, locked: r[2] ?? 0n, seeded: r[3] ?? 0n, uri: r[4] };
   });
-  return { decks, refetch: () => { ids.refetch(); res.refetch(); } };
+  // Hide decks until their data loads, so a retired deck never flashes as active.
+  const loaded = decks.filter((_, i) => res.data?.[i * 5]?.result);
+  return { decks: loaded, refetch: () => { ids.refetch(); res.refetch(); } };
 }
 
 export function svgFromUri(uri?: string): string | undefined {

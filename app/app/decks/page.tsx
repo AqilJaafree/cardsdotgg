@@ -21,7 +21,7 @@ function Rates() {
 function RateRow({ tier, name }: { tier: number; name: string }) {
   const r = useReadContract({ address: ad("rateOracle"), abi: abis.oracle, functionName: "rateOf", args: [tier] });
   const src = rateSources.find((s) => String(s.tier) === String(tier) || String(s.tier).toLowerCase() === name.toLowerCase());
-  return <div>{name}: {(Number(r.data ?? 0) / 100).toFixed(2)}% APR · {src?.live ? <>source: Monad mainnet (<a href={src.sourceUrl} target="_blank" rel="noreferrer">{src.source}</a>, read {src.readAt})</> : "demo rate, not live"}{(src as any)?.inRange === false && <b className="err"> · out of range, not earning fees right now</b>}{(src as any)?.note && <div><small>{String((src as any).note)}</small></div>}</div>;
+  return <div>{name}: {r.data === undefined ? "…" : (Number(r.data) / 100).toFixed(2) + "%"} APR · {src?.live ? <>source: Monad mainnet (<a href={src.sourceUrl} target="_blank" rel="noreferrer">{src.source}</a>, read {src.readAt})</> : "demo rate, not live"}{(src as any)?.inRange === false && <b className="err"> · out of range, not earning fees right now</b>}{(src as any)?.note && <div><small>{String((src as any).note)}</small></div>}</div>;
 }
 
 export default function Decks() {
