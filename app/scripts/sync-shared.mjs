@@ -1,0 +1,10 @@
+// Copies Agent A's shared/ artifacts into app/lib/shared (gitignored). Addresses/ABIs come only from shared/.
+import { cpSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
+const src = new URL("../../shared/", import.meta.url), dst = new URL("../lib/shared/", import.meta.url);
+mkdirSync(dst, { recursive: true });
+cpSync(new URL("abi/", src), new URL("abi/", dst), { recursive: true });
+cpSync(new URL("cards.json", src), new URL("cards.json", dst));
+for (const f of ["addresses.json", "rate-sources.json"]) {
+  if (existsSync(new URL(f, src))) cpSync(new URL(f, src), new URL(f, dst));
+  else { writeFileSync(new URL(f, dst), f === "addresses.json" ? "{}" : "[]"); console.warn(`shared/${f} missing, wrote empty`); }
+}
