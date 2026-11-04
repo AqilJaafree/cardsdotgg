@@ -12,7 +12,7 @@ import {SvgRenderer} from "./SvgRenderer.sol";
 contract DeckNFT is ERC721 {
     IDeckVault public immutable vault;
 
-    constructor(IDeckVault vault_) ERC721("YieldDeck", "YDECK") {
+    constructor(IDeckVault vault_) ERC721("Cardsdotgg", "YDECK") {
         vault = vault_;
     }
 
@@ -39,7 +39,7 @@ contract DeckNFT is ERC721 {
         string memory svg = SvgRenderer.render(tokenId, tier, d.asset == Asset.TGOLD, d.retired);
         string memory json = string.concat(
             '{"name":"', SvgRenderer.tierName(tier), " Deck #", Strings.toString(tokenId),
-            '","description":"YieldDeck testnet deck","image":"data:image/svg+xml;base64,',
+            '","description":"Cardsdotgg testnet deck","image":"data:image/svg+xml;base64,',
             Base64.encode(bytes(svg)), '"}'
         );
         return string.concat("data:application/json;base64,", Base64.encode(bytes(json)));

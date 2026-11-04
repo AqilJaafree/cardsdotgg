@@ -23,7 +23,7 @@ contract LiquidityPool is ILiquidityPool, ERC20, ReentrancyGuard {
     uint256 private _tusdReserve;
     uint256 private _goldReserve;
 
-    constructor(IERC20 tusd_, IERC20 tgold_) ERC20("YieldDeck tUSD/tGOLD LP (testnet)", "ydLP") {
+    constructor(IERC20 tusd_, IERC20 tgold_) ERC20("Cardsdotgg tUSD/tGOLD LP (testnet)", "ydLP") {
         tusd = tusd_;
         tgold = tgold_;
     }

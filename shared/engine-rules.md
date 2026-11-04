@@ -1,4 +1,4 @@
-# YieldDeck engine rulings
+# Cardsdotgg engine rulings
 
 The authoritative battle rules are `cardsdotgg.md`, section "Battle engine". These rulings fill its gaps.
 

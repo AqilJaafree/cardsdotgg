@@ -1,18 +1,18 @@
-# YieldDeck — PRD & Technical Spec
+# Cardsdotgg — PRD & Technical Spec
 
 Nov 4, 2026 · Wan
 
 ## Design evaluation
 
-The core hook works: a deck that is also a live DeFi position gives every match real stakes and every card a personality driven by the market. Five rules in the first draft would break the game, so this spec replaces them. YieldDeck is a working name.
+The core hook works: a deck that is also a live DeFi position gives every match real stakes and every card a personality driven by the market. Five rules in the first draft would break the game, so this spec replaces them. Cardsdotgg is a working name.
 
-| Original rule | Why it breaks | Replacement in this spec |
-| --- | --- | --- |
-| +10 win / −15 loss | Negative-sum: a 50% win-rate player loses \~2.5 points per match forever. Ratings drift down and players stop queuing to protect rank. | Elo with start 500 and a K-factor that scales with the rating gap. Beating a stronger player pays more. |
-| Loser gives up 0.1% yield | Undefined base (yield accrued, principal, or APY points). Paying value on match outcome is wagering, which is tightly regulated in Malaysia and many venues. | Stake comes only from a Yield Escrow of accrued yield, never principal. Capped per match. A zero-value Rank-only mode is always available. |
-| High-yield deck = high-yield position | If yield or deposit size raises card power, whales win and new players churn. | Every deck has the same power budget. Risk tier changes variance and playstyle, not expected strength. Deposit size only raises the stake ceiling. |
-| Win/lose moves value between wallets | Two wallets can lose on purpose to launder yield or farm rank. | Stake limits by rating gap, decay on repeat opponents, pair-frequency detection, minimum account age for staked play. |
-| Battle royale at a physical venue | No one trusted to report results in a room of 64 players. | Server-authoritative engine, deterministic replay from a public seed, venue check-in, onchain settlement with a dispute window. |
+| Original rule                         | Why it breaks                                                                                                                                                | Replacement in this spec                                                                                                                           |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| +10 win / −15 loss                    | Negative-sum: a 50% win-rate player loses \~2.5 points per match forever. Ratings drift down and players stop queuing to protect rank.                       | Elo with start 500 and a K-factor that scales with the rating gap. Beating a stronger player pays more.                                            |
+| Loser gives up 0.1% yield             | Undefined base (yield accrued, principal, or APY points). Paying value on match outcome is wagering, which is tightly regulated in Malaysia and many venues. | Stake comes only from a Yield Escrow of accrued yield, never principal. Capped per match. A zero-value Rank-only mode is always available.         |
+| High-yield deck = high-yield position | If yield or deposit size raises card power, whales win and new players churn.                                                                                | Every deck has the same power budget. Risk tier changes variance and playstyle, not expected strength. Deposit size only raises the stake ceiling. |
+| Win/lose moves value between wallets  | Two wallets can lose on purpose to launder yield or farm rank.                                                                                               | Stake limits by rating gap, decay on repeat opponents, pair-frequency detection, minimum account age for staked play.                              |
+| Battle royale at a physical venue     | No one trusted to report results in a room of 64 players.                                                                                                    | Server-authoritative engine, deterministic replay from a public seed, venue check-in, onchain settlement with a dispute window.                    |
 
 ### What we add to make it sticky
 
@@ -27,7 +27,7 @@ The core hook works: a deck that is also a live DeFi position gives every match 
 
 ## PRD
 
-YieldDeck turns a yield-bearing RWA position on Monad into a collectible battle deck that players use in ranked online play and in battle royale at physical events. Principal stays the player's; only accrued yield is ever at stake.
+Cardsdotgg turns a yield-bearing RWA position on Monad into a collectible battle deck that players use in ranked online play and in battle royale at physical events. Principal stays the player's; only accrued yield is ever at stake.
 
 ### Problem
 
@@ -50,40 +50,40 @@ YieldDeck turns a yield-bearing RWA position on Monad into a collectible battle 
 
 ### Target users
 
-| Persona | Who | What they want |
-| --- | --- | --- |
-| DeFi holder | Already holds stablecoins or gold on Monad | Yield plus a reason to open the app daily |
-| Competitive gamer | Plays card or auto-battler games | Skill-based ranked ladder with real but bounded stakes |
-| Event player | Student or meetup attendee, new to crypto | Walk in, scan a QR, play in minutes without seed phrases |
-| Organizer | Campus club, community lead, venue | Run a tournament with check-in, brackets and payouts handled |
+| Persona           | Who                                        | What they want                                               |
+| ----------------- | ------------------------------------------ | ------------------------------------------------------------ |
+| DeFi holder       | Already holds stablecoins or gold on Monad | Yield plus a reason to open the app daily                    |
+| Competitive gamer | Plays card or auto-battler games           | Skill-based ranked ladder with real but bounded stakes       |
+| Event player      | Student or meetup attendee, new to crypto  | Walk in, scan a QR, play in minutes without seed phrases     |
+| Organizer         | Campus club, community lead, venue         | Run a tournament with check-in, brackets and payouts handled |
 
 ### Feature scope
 
-| Feature | Priority | Notes |
-| --- | --- | --- |
-| Deposit into a strategy vault and mint a deck | P0 | Stablecoin or gold in; Guardian, Balanced or Degen strategy |
-| Ranked 1v1 (online) | P0 | Elo ladder, start 500, optional yield stake |
-| Rank-only and Friendly modes | P0 | Zero value at stake; friend challenge links |
-| Yield Escrow and match settlement | P0 | Stake locked at queue time, settled onchain |
-| Withdraw to stablecoin or gold | P0 | Redeem shares, swap, slippage guard |
-| Battle royale at venues | P1 | Check-in, pods, crash zone, prize pot |
-| Market Weather | P1 | Oracle-driven stat modifiers per match |
-| Diamond Hands XP and card levels | P1 | Levels from time deposited |
-| Seasons, battle pass, quests, streaks | P1 | Pass purchasable with accrued yield |
-| Ghost battles | P2 | Async play against replays |
-| Clans and campus leaderboards | P2 | Clan vault, clan wars |
-| Spectator mode and cosmetics | P2 | Event screens, skins, emotes |
+| Feature                                       | Priority | Notes                                                       |
+| --------------------------------------------- | -------- | ----------------------------------------------------------- |
+| Deposit into a strategy vault and mint a deck | P0       | Stablecoin or gold in; Guardian, Balanced or Degen strategy |
+| Ranked 1v1 (online)                           | P0       | Elo ladder, start 500, optional yield stake                 |
+| Rank-only and Friendly modes                  | P0       | Zero value at stake; friend challenge links                 |
+| Yield Escrow and match settlement             | P0       | Stake locked at queue time, settled onchain                 |
+| Withdraw to stablecoin or gold                | P0       | Redeem shares, swap, slippage guard                         |
+| Battle royale at venues                       | P1       | Check-in, pods, crash zone, prize pot                       |
+| Market Weather                                | P1       | Oracle-driven stat modifiers per match                      |
+| Diamond Hands XP and card levels              | P1       | Levels from time deposited                                  |
+| Seasons, battle pass, quests, streaks         | P1       | Pass purchasable with accrued yield                         |
+| Ghost battles                                 | P2       | Async play against replays                                  |
+| Clans and campus leaderboards                 | P2       | Clan vault, clan wars                                       |
+| Spectator mode and cosmetics                  | P2       | Event screens, skins, emotes                                |
 
 ### Success metrics
 
-| Metric | Target at 90 days |
-| --- | --- |
-| D1 / D7 / D30 retention | 45% / 25% / 12% |
-| Matches per daily active user | 6 or more |
-| Deposits still in place after 30 days | 70% of TVL |
-| Median session length | 12 minutes |
-| Event check-in to first match | under 3 minutes |
-| Settlement disputes | under 0.5% of staked matches |
+| Metric                                | Target at 90 days            |
+| ------------------------------------- | ---------------------------- |
+| D1 / D7 / D30 retention               | 45% / 25% / 12%              |
+| Matches per daily active user         | 6 or more                    |
+| Deposits still in place after 30 days | 70% of TVL                   |
+| Median session length                 | 12 minutes                   |
+| Event check-in to first match         | under 3 minutes              |
+| Settlement disputes                   | under 0.5% of staked matches |
 
 Targets are starting assumptions to revisit after the first closed beta.
 
@@ -101,11 +101,11 @@ Every deck gets the same power budget; the strategy behind it decides how that p
 
 ### Risk tiers
 
-| Tier | Example strategy | Playstyle | Crit chance / multiplier | Signature ability |
-| --- | --- | --- | --- | --- |
-| Guardian (low risk) | Stablecoin lending, T-bill tokens | High HP and DEF, steady damage | 5% / 1.3× | Peg Shield: blocks the first hit each round |
-| Balanced (medium) | RWA credit plus gold | Even stats, flexible | 12% / 1.5× | Rebalance: swap a bench card in for free |
-| Degen (high risk) | Leveraged loops, LP, basis trades | High ATK and SPD, low HP | 25% / 1.8× | Liquidation Strike: big hit, self-damage on miss |
+| Tier                | Example strategy                  | Playstyle                      | Crit chance / multiplier | Signature ability                                |
+| ------------------- | --------------------------------- | ------------------------------ | ------------------------ | ------------------------------------------------ |
+| Guardian (low risk) | Stablecoin lending, T-bill tokens | High HP and DEF, steady damage | 5% / 1.3×                | Peg Shield: blocks the first hit each round      |
+| Balanced (medium)   | RWA credit plus gold              | Even stats, flexible           | 12% / 1.5×               | Rebalance: swap a bench card in for free         |
+| Degen (high risk)   | Leveraged loops, LP, basis trades | High ATK and SPD, low HP       | 25% / 1.8×               | Liquidation Strike: big hit, self-damage on miss |
 
 Balance target: each tier wins 48–52% of ranked matches against each other tier. Patch stats each season if any matchup leaves that band.
 
@@ -138,14 +138,14 @@ E_A = \frac{1}{1 + 10^{(R_B - R_A)/400}} \qquad R_A' = R_A + K\,(S_A - E_A)
 - A loss streak of 3 or more halves the next loss (tilt protection); a win streak of 3 adds +3 per win.
 - Seasons last 8 weeks. Soft reset: new rating = 500 + (old − 500) × 0.5.
 
-| Tier | Rating |
-| --- | --- |
-| Bronze | 0–599 |
-| Silver | 600–799 |
-| Gold | 800–999 |
-| Platinum | 1000–1199 |
-| Diamond | 1200–1399 |
-| Monad | 1400 and above |
+| Tier     | Rating         |
+| -------- | -------------- |
+| Bronze   | 0–599          |
+| Silver   | 600–799        |
+| Gold     | 800–999        |
+| Platinum | 1000–1199      |
+| Diamond  | 1200–1399      |
+| Monad    | 1400 and above |
 
 ### Yield stakes
 
@@ -161,13 +161,13 @@ Only accrued yield is ever at stake, and only in modes the player chooses.
 
 ### Game modes
 
-| Mode | Where | Players | Stake | Rating |
-| --- | --- | --- | --- | --- |
-| Ranked | Online | 1v1 | Optional, from escrow | Yes |
-| Rank-only | Online | 1v1 | None | Yes |
-| Friendly | Online or in person | 1v1 via link or QR | Optional, both agree | No |
-| Ghost | Online | 1 vs a replayed deck | None | No, quest progress only |
-| Battle royale | Physical venue | 8–64 | Fixed entry from escrow into event pot | Event leaderboard plus a season bonus |
+| Mode          | Where               | Players              | Stake                                  | Rating                                |
+| ------------- | ------------------- | -------------------- | -------------------------------------- | ------------------------------------- |
+| Ranked        | Online              | 1v1                  | Optional, from escrow                  | Yes                                   |
+| Rank-only     | Online              | 1v1                  | None                                   | Yes                                   |
+| Friendly      | Online or in person | 1v1 via link or QR   | Optional, both agree                   | No                                    |
+| Ghost         | Online              | 1 vs a replayed deck | None                                   | No, quest progress only               |
+| Battle royale | Physical venue      | 8–64                 | Fixed entry from escrow into event pot | Event leaderboard plus a season bonus |
 
 ### Battle royale rules
 
@@ -179,14 +179,14 @@ Only accrued yield is ever at stake, and only in modes the player chooses.
 
 ### Progression and retention loops
 
-| Loop | Cadence | Reward |
-| --- | --- | --- |
-| Daily quests (win 2, play a Guardian deck, use an ability 5 times) | Daily | Pass XP, cosmetic shards |
-| Win streaks | Per session | Bonus rating, streak badge |
-| Diamond Hands XP | Daily, passive | +1 card level per 7 days deposited, max level 10 |
-| Battle pass | 8-week season | Free track; premium track bought with accrued yield |
-| Clan wars | Weekly | Clan vault bonus, banner cosmetics |
-| Campus and city leaderboards | Season | Event invitations, titles |
+| Loop                                                               | Cadence        | Reward                                              |
+| ------------------------------------------------------------------ | -------------- | --------------------------------------------------- |
+| Daily quests (win 2, play a Guardian deck, use an ability 5 times) | Daily          | Pass XP, cosmetic shards                            |
+| Win streaks                                                        | Per session    | Bonus rating, streak badge                          |
+| Diamond Hands XP                                                   | Daily, passive | +1 card level per 7 days deposited, max level 10    |
+| Battle pass                                                        | 8-week season  | Free track; premium track bought with accrued yield |
+| Clan wars                                                          | Weekly         | Clan vault bonus, banner cosmetics                  |
+| Campus and city leaderboards                                       | Season         | Event invitations, titles                           |
 
 - Each card level adds +1% to stats, capped at +10%. Ranked matchmaking prefers players within 3 average levels.
 - Withdrawing a deck keeps 50% of its XP if the player redeposits within 30 days.
@@ -232,30 +232,30 @@ Players sign deposits, withdrawals and stake locks straight to the contracts; ev
 
 ### Smart contracts (Solidity, Monad mainnet)
 
-| Contract | Responsibility |
-| --- | --- |
-| `StrategyVault` (ERC-4626, one per strategy) | Holds deposits, routes to yield adapters, reports share price |
-| `StrategyAdapter` (per protocol) | Deposit and withdraw into lending, RWA credit or gold strategies; isolates protocol risk |
-| `DeckNFT` (ERC-721) | One token per deck; stores strategy id, card set hash, level data; non-transferable while shares are bound |
-| `YieldEscrow` | Receives harvested yield per deck; locks and releases match stakes; principal can never be pulled here |
-| `MatchSettlement` | Verifies signed results (EIP-712), moves stakes, emits rating updates, holds a 10-minute dispute window |
-| `RatingRegistry` | Stores Elo per player per season; updated only by `MatchSettlement` |
-| `EventManager` | Creates venue events, issues check-in keys, holds battle royale pots, pays top 3 |
-| `SeasonPass` | Sells premium pass for escrowed yield; tracks pass tiers |
-| `WithdrawRouter` | Redeems shares and swaps to the chosen exit asset with a slippage limit |
+| Contract                                     | Responsibility                                                                                             |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `StrategyVault` (ERC-4626, one per strategy) | Holds deposits, routes to yield adapters, reports share price                                              |
+| `StrategyAdapter` (per protocol)             | Deposit and withdraw into lending, RWA credit or gold strategies; isolates protocol risk                   |
+| `DeckNFT` (ERC-721)                          | One token per deck; stores strategy id, card set hash, level data; non-transferable while shares are bound |
+| `YieldEscrow`                                | Receives harvested yield per deck; locks and releases match stakes; principal can never be pulled here     |
+| `MatchSettlement`                            | Verifies signed results (EIP-712), moves stakes, emits rating updates, holds a 10-minute dispute window    |
+| `RatingRegistry`                             | Stores Elo per player per season; updated only by `MatchSettlement`                                        |
+| `EventManager`                               | Creates venue events, issues check-in keys, holds battle royale pots, pays top 3                           |
+| `SeasonPass`                                 | Sells premium pass for escrowed yield; tracks pass tiers                                                   |
+| `WithdrawRouter`                             | Redeems shares and swaps to the chosen exit asset with a slippage limit                                    |
 
 All contracts are upgradeable behind a timelock and a multisig, with a pause guardian on vaults and settlement.
 
 ### Offchain services
 
-| Service | Stack (suggested) | Role |
-| --- | --- | --- |
-| Game server | TypeScript or Go, WebSockets | Authoritative match engine, commit-reveal turns, signs results |
-| Matchmaker | Redis queues | Pairs by rating, level and stake rules |
-| Indexer | Custom indexer or hosted subgraph | Reads vault, deck, match and event state for the app |
-| Oracle reader | Pyth pull feeds | Prices for Market Weather and for vault valuation |
-| Integrity service | Python or SQL jobs | Collusion detection, repeat-pair limits, dispute replays |
-| Client | React Native and web, Phaser or PixiJS for battle | Deck builder, battles, event mode, wallet |
+| Service           | Stack (suggested)                                 | Role                                                           |
+| ----------------- | ------------------------------------------------- | -------------------------------------------------------------- |
+| Game server       | TypeScript or Go, WebSockets                      | Authoritative match engine, commit-reveal turns, signs results |
+| Matchmaker        | Redis queues                                      | Pairs by rating, level and stake rules                         |
+| Indexer           | Custom indexer or hosted subgraph                 | Reads vault, deck, match and event state for the app           |
+| Oracle reader     | Pyth pull feeds                                   | Prices for Market Weather and for vault valuation              |
+| Integrity service | Python or SQL jobs                                | Collusion detection, repeat-pair limits, dispute replays       |
+| Client            | React Native and web, Phaser or PixiJS for battle | Deck builder, battles, event mode, wallet                      |
 
 ### Randomness and fairness
 
@@ -282,15 +282,15 @@ The loser never has to sign, because the stake was locked when they queued.
 
 ### Data model
 
-| Entity | Key fields |
-| --- | --- |
-| Player | address, displayName, accountCreatedAt, clanId, campus |
-| Deck | deckId, owner, strategyId, shares, cardIds\[8\], level, xp, depositedAt |
-| Card | cardId, assetClass, tier, hp, atk, def, spd, abilityId, skinId |
-| Match | matchId, mode, players\[2\], stake, seed, weatherSnapshot, moveLogHash, winner, status |
-| Rating | player, seasonId, rating, matches, streak |
-| Event | eventId, venue, organizer, checkInKey, entryStake, pods, pot, status |
-| Escrow | deckId, available, locked |
+| Entity | Key fields                                                                             |
+| ------ | -------------------------------------------------------------------------------------- |
+| Player | address, displayName, accountCreatedAt, clanId, campus                                 |
+| Deck   | deckId, owner, strategyId, shares, cardIds\[8\], level, xp, depositedAt                |
+| Card   | cardId, assetClass, tier, hp, atk, def, spd, abilityId, skinId                         |
+| Match  | matchId, mode, players\[2\], stake, seed, weatherSnapshot, moveLogHash, winner, status |
+| Rating | player, seasonId, rating, matches, streak                                              |
+| Event  | eventId, venue, organizer, checkInKey, entryStake, pods, pot, status                   |
+| Escrow | deckId, available, locked                                                              |
 
 ### Assets on Monad
 
@@ -380,27 +380,27 @@ The prototype MUST run on Monad testnet with real wallet-signed transactions for
 
 These defaults hold for the prototype unless changed here; Claude Code should not re-decide them.
 
-| Decision | Prototype choice |
-| --- | --- |
-| Ranking rule | Elo, start 500, K=32, floor 0 |
-| Battle style | Auto-battle resolved onchain from a seed; no per-round player moves |
-| Decks per wallet | Up to 5; deck type chosen at mint |
-| Minimum deposit | 10 tUSD, or tGOLD worth 10 tUSD at the oracle gold price |
-| Gold conversion | Live mainnet gold price, pushed by the same keeper into `RateOracle` |
-| Card art | Generated SVG cards: tier-coloured frame, a simple asset-class icon, name and stats. No AI images or third-party characters |
-| Challenge timeout | 1 hour; anyone can call `expire` to refund the locked stake |
-| Draws | Stakes returned; Elo score 0.5 each |
+| Decision          | Prototype choice                                                                                                            |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Ranking rule      | Elo, start 500, K=32, floor 0                                                                                               |
+| Battle style      | Auto-battle resolved onchain from a seed; no per-round player moves                                                         |
+| Decks per wallet  | Up to 5; deck type chosen at mint                                                                                           |
+| Minimum deposit   | 10 tUSD, or tGOLD worth 10 tUSD at the oracle gold price                                                                    |
+| Gold conversion   | Live mainnet gold price, pushed by the same keeper into `RateOracle`                                                        |
+| Card art          | Generated SVG cards: tier-coloured frame, a simple asset-class icon, name and stats. No AI images or third-party characters |
+| Challenge timeout | 1 hour; anyone can call `expire` to refund the locked stake                                                                 |
+| Draws             | Stakes returned; Elo score 0.5 each                                                                                         |
 
 ### Network
 
-| Parameter | Value |
-| --- | --- |
-| Network | Monad Testnet |
-| Chain ID | 10143 |
-| Gas token | MON |
-| Public RPC | `https://testnet-rpc.monad.xyz` (25 rps), fallback `https://rpc.ankr.com/monad_testnet` |
-| Explorers | `https://testnet.monadvision.com`, `https://testnet.monadscan.com` |
-| Faucet (MON for gas) | `https://faucet.monad.xyz` |
+| Parameter            | Value                                                                                   |
+| -------------------- | --------------------------------------------------------------------------------------- |
+| Network              | Monad Testnet                                                                           |
+| Chain ID             | 10143                                                                                   |
+| Gas token            | MON                                                                                     |
+| Public RPC           | `https://testnet-rpc.monad.xyz` (25 rps), fallback `https://rpc.ankr.com/monad_testnet` |
+| Explorers            | `https://testnet.monadvision.com`, `https://testnet.monadscan.com`                      |
+| Faucet (MON for gas) | `https://faucet.monad.xyz`                                                              |
 
 Source: [Monad testnet docs](https://docs.monad.xyz/developer-essentials/testnets). Re-check before deploying; testnet values change.
 
@@ -427,11 +427,11 @@ Source: [Monad testnet docs](https://docs.monad.xyz/developer-essentials/testnet
 
 Testnet vaults MUST accrue at real Monad mainnet (chain ID 143) rates, pushed hourly by a keeper into a `RateOracle` contract on testnet.
 
-| Tier | Mainnet source type | How the rate is read |
-| --- | --- | --- |
-| Guardian | Stablecoin lending market (e.g. Aave V3) | Reserve supply rate: `getReserveData(asset).currentLiquidityRate`, in ray (1e27) |
+| Tier     | Mainnet source type                                                                         | How the rate is read                                                                                                 |
+| -------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Guardian | Stablecoin lending market (e.g. Aave V3)                                                    | Reserve supply rate: `getReserveData(asset).currentLiquidityRate`, in ray (1e27)                                     |
 | Balanced | RWA credit vault (e.g. a yield-bearing stable like syrupUSDC) plus a gold leg if one exists | ERC-4626 share price: `convertToAssets(1e18)` sampled over a trailing 7 days, annualized; weighted 70/30 credit/gold |
-| Degen | Higher-yield vault (e.g. a Morpho, Euler or sUSDe-style vault) | Same ERC-4626 share-price method |
+| Degen    | Higher-yield vault (e.g. a Morpho, Euler or sUSDe-style vault)                              | Same ERC-4626 share-price method                                                                                     |
 
 - [ ] Keeper reads mainnet hourly and calls `RateOracle.setRates(guardianBps, balancedBps, degenBps, mainnetBlock)`; only the keeper address can write.
 - [ ] Vaults accrue per second at the oracle's current rate, checkpointing on every deposit, withdraw and rate update.
@@ -450,16 +450,16 @@ Foundry for contracts and tests; Next.js with wagmi and viem for the app; contra
 
 The prototype uses this smaller set, not the production list in Technical spec. There is no game server.
 
-| Contract | Responsibility |
-| --- | --- |
-| `TestToken` ×2 (`tUSD`, `tGOLD`) | Testnet ERC-20s with rate-limited `claim()`; owner can mint to fund the reserve |
-| `RateOracle` | Keeper-written tier APRs and gold price, with staleness and clamp rules |
-| `DeckVault` | Deposits per tier, per-second accrual from `RateOracle`, mints and retires decks |
-| `DeckNFT` | ERC-721 deck with tier, 8-card lineup and onchain SVG `tokenURI` |
-| `YieldEscrow` | Accrued yield per deck; locks and releases stakes |
-| `Arena` | Challenges, seed, calls `BattleEngine`, settles stakes, updates Elo |
-| `BattleEngine` (library) | Pure, deterministic battle simulation |
-| `WithdrawRouter` | Redeems to `tUSD` or `tGOLD` at the oracle gold price |
+| Contract                         | Responsibility                                                                   |
+| -------------------------------- | -------------------------------------------------------------------------------- |
+| `TestToken` ×2 (`tUSD`, `tGOLD`) | Testnet ERC-20s with rate-limited `claim()`; owner can mint to fund the reserve  |
+| `RateOracle`                     | Keeper-written tier APRs and gold price, with staleness and clamp rules          |
+| `DeckVault`                      | Deposits per tier, per-second accrual from `RateOracle`, mints and retires decks |
+| `DeckNFT`                        | ERC-721 deck with tier, 8-card lineup and onchain SVG `tokenURI`                 |
+| `YieldEscrow`                    | Accrued yield per deck; locks and releases stakes                                |
+| `Arena`                          | Challenges, seed, calls `BattleEngine`, settles stakes, updates Elo              |
+| `BattleEngine` (library)         | Pure, deterministic battle simulation                                            |
+| `WithdrawRouter`                 | Redeems to `tUSD` or `tGOLD` at the oracle gold price                            |
 
 One active stake per deck at a time. Ownership of all contracts sits with the deployer for the prototype.
 
@@ -471,32 +471,32 @@ Battle royale venue mode, Market Weather oracle feeds, battle pass, clans, embed
 
 All creatures are original. Every card's HP + ATK + DEF + SPD = 100. Public Pokémon TCG data may be used only as an aggregate reference for balance (HP bands, damage per turn); no Pokémon names, art or card text may appear anywhere in the prototype.
 
-| Deck | Card | Asset class | HP | ATK | DEF | SPD | Ability |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Guardian | Pegshell | Stable | 40 | 15 | 35 | 10 | Peg Shield: blocks the first hit each round |
-| Guardian | Treasury Sentinel | Treasury | 38 | 18 | 32 | 12 | Coupon: heals 5 HP each round |
-| Guardian | Bondback Tortoise | Treasury | 42 | 14 | 34 | 10 | Duration Lock: takes 10% less damage |
-| Guardian | Ledger Owl | Stable | 30 | 22 | 26 | 22 | Audit: cancels one enemy crit per match |
-| Guardian | Vault Golem | Gold | 36 | 24 | 30 | 10 | Safe Haven: +10% DEF when an ally faints |
-| Guardian | Mint Sprite | Stable | 28 | 24 | 24 | 24 | Redeem: swaps with a bench card for free |
-| Guardian | Coupon Crab | Credit | 34 | 22 | 30 | 14 | Hard Shell: reflects 10% of damage taken |
-| Guardian | Reserve Bison | Treasury | 38 | 26 | 26 | 10 | Backstop: survives one lethal hit at 1 HP |
-| Balanced | Aurum Lynx | Gold | 28 | 30 | 20 | 22 | Gold Rush: +10% ATK in round 1 |
-| Balanced | Yield Heron | Credit | 30 | 28 | 22 | 20 | Accrue: +2 ATK each round it stays active |
-| Balanced | Gilded Ram | Gold | 32 | 28 | 26 | 14 | Charge: first hit ignores 50% DEF |
-| Balanced | Rebalance Fox | Credit | 26 | 28 | 18 | 28 | Rebalance: swaps a bench card in for free |
-| Balanced | Collateral Bear | Credit | 34 | 26 | 28 | 12 | Overcollateral: +15% DEF below half HP |
-| Balanced | Bullion Beetle | Gold | 30 | 24 | 30 | 16 | Store of Value: heals 3 HP each round |
-| Balanced | Basis Kestrel | Treasury | 26 | 30 | 20 | 24 | Arbitrage: copies the enemy's SPD if higher |
-| Balanced | Spread Serpent | Credit | 28 | 32 | 18 | 22 | Widen: −10% enemy DEF for 2 rounds |
-| Degen | Leverage Raptor | BTC | 20 | 42 | 10 | 28 | 2x Long: double damage, takes double on a miss |
-| Degen | Liquidation Wolf | BTC | 22 | 40 | 12 | 26 | Liquidation Strike: finishes enemies below 20% HP |
-| Degen | Funding Wasp | BTC | 18 | 38 | 8 | 36 | Funding Rate: steals 3 HP each hit |
-| Degen | Loop Kraken | Credit | 26 | 38 | 14 | 22 | Recursive Loop: hits twice at 60% damage |
-| Degen | Perp Panther | BTC | 20 | 40 | 10 | 30 | Open Interest: +5% crit per round active |
-| Degen | Ape Comet | BTC | 16 | 44 | 8 | 32 | Full Send: attacks first, ignores SPD order |
-| Degen | Basis Mantis | Credit | 24 | 36 | 14 | 26 | Hedge: 20% chance to dodge |
-| Degen | Halving Hydra | BTC | 24 | 38 | 12 | 26 | Halving: halves the enemy's next heal or shield |
+| Deck     | Card              | Asset class | HP  | ATK | DEF | SPD | Ability                                           |
+| -------- | ----------------- | ----------- | --- | --- | --- | --- | ------------------------------------------------- |
+| Guardian | Pegshell          | Stable      | 40  | 15  | 35  | 10  | Peg Shield: blocks the first hit each round       |
+| Guardian | Treasury Sentinel | Treasury    | 38  | 18  | 32  | 12  | Coupon: heals 5 HP each round                     |
+| Guardian | Bondback Tortoise | Treasury    | 42  | 14  | 34  | 10  | Duration Lock: takes 10% less damage              |
+| Guardian | Ledger Owl        | Stable      | 30  | 22  | 26  | 22  | Audit: cancels one enemy crit per match           |
+| Guardian | Vault Golem       | Gold        | 36  | 24  | 30  | 10  | Safe Haven: +10% DEF when an ally faints          |
+| Guardian | Mint Sprite       | Stable      | 28  | 24  | 24  | 24  | Redeem: swaps with a bench card for free          |
+| Guardian | Coupon Crab       | Credit      | 34  | 22  | 30  | 14  | Hard Shell: reflects 10% of damage taken          |
+| Guardian | Reserve Bison     | Treasury    | 38  | 26  | 26  | 10  | Backstop: survives one lethal hit at 1 HP         |
+| Balanced | Aurum Lynx        | Gold        | 28  | 30  | 20  | 22  | Gold Rush: +10% ATK in round 1                    |
+| Balanced | Yield Heron       | Credit      | 30  | 28  | 22  | 20  | Accrue: +2 ATK each round it stays active         |
+| Balanced | Gilded Ram        | Gold        | 32  | 28  | 26  | 14  | Charge: first hit ignores 50% DEF                 |
+| Balanced | Rebalance Fox     | Credit      | 26  | 28  | 18  | 28  | Rebalance: swaps a bench card in for free         |
+| Balanced | Collateral Bear   | Credit      | 34  | 26  | 28  | 12  | Overcollateral: +15% DEF below half HP            |
+| Balanced | Bullion Beetle    | Gold        | 30  | 24  | 30  | 16  | Store of Value: heals 3 HP each round             |
+| Balanced | Basis Kestrel     | Treasury    | 26  | 30  | 20  | 24  | Arbitrage: copies the enemy's SPD if higher       |
+| Balanced | Spread Serpent    | Credit      | 28  | 32  | 18  | 22  | Widen: −10% enemy DEF for 2 rounds                |
+| Degen    | Leverage Raptor   | BTC         | 20  | 42  | 10  | 28  | 2x Long: double damage, takes double on a miss    |
+| Degen    | Liquidation Wolf  | BTC         | 22  | 40  | 12  | 26  | Liquidation Strike: finishes enemies below 20% HP |
+| Degen    | Funding Wasp      | BTC         | 18  | 38  | 8   | 36  | Funding Rate: steals 3 HP each hit                |
+| Degen    | Loop Kraken       | Credit      | 26  | 38  | 14  | 22  | Recursive Loop: hits twice at 60% damage          |
+| Degen    | Perp Panther      | BTC         | 20  | 40  | 10  | 30  | Open Interest: +5% crit per round active          |
+| Degen    | Ape Comet         | BTC         | 16  | 44  | 8   | 32  | Full Send: attacks first, ignores SPD order       |
+| Degen    | Basis Mantis      | Credit      | 24  | 36  | 14  | 26  | Hedge: 20% chance to dodge                        |
+| Degen    | Halving Hydra     | BTC         | 24  | 38  | 12  | 26  | Halving: halves the enemy's next heal or shield   |
 
 Crit rules come from the risk tier table: Guardian 5% at 1.3×, Balanced 12% at 1.5×, Degen 25% at 1.8×.
 
@@ -537,32 +537,32 @@ After round 15, the winner is the side with the higher total remaining HP as a s
 
 **Ability rules (authoritative)**
 
-| Card | Ability | Exact rule |
-| --- | --- | --- |
-| Pegshell | Peg Shield | The first hit it takes each round deals 0 |
-| Treasury Sentinel | Coupon | End of round: heals 5% of max HP |
-| Bondback Tortoise | Duration Lock | Takes 90% of incoming damage |
-| Ledger Owl | Audit | Once per match, while active, the first enemy crit against any ally becomes a normal hit |
-| Vault Golem | Safe Haven | +10% DEF each time an ally faints, stacking to +30% |
-| Mint Sprite | Redeem | Once per match, end of round below 30% HP: swaps with the first living bench card, keeping its HP |
-| Coupon Crab | Hard Shell | Reflects 10% of damage taken to the attacker |
-| Reserve Bison | Backstop | Once per match, a lethal hit leaves it at 1 HP |
-| Aurum Lynx | Gold Rush | +10% ATK in round 1 |
-| Yield Heron | Accrue | End of each round it is active: +2 ATK, up to +10 |
-| Gilded Ram | Charge | Its first attack of the match ignores 50% of target DEF |
-| Rebalance Fox | Rebalance | Once per match, end of round: the lowest-HP ally active card below 40% swaps with the first living bench card |
-| Collateral Bear | Overcollateral | +15% DEF while below 50% HP |
-| Bullion Beetle | Store of Value | End of round: heals 3% of max HP |
-| Basis Kestrel | Arbitrage | Uses the highest enemy active SPD if higher than its own |
-| Spread Serpent | Widen | Its hits set target DEF −10% for 2 rounds; refreshes, does not stack |
-| Leverage Raptor | 2x Long | Each attack: `roll(100)` < 60 deals 2× damage; otherwise 0.5× and it takes 10% of its max HP |
-| Liquidation Wolf | Liquidation Strike | After its hit, a target below 20% HP faints |
-| Funding Wasp | Funding Rate | Heals 30% of damage it deals |
-| Loop Kraken | Recursive Loop | Attacks twice at 60% damage, each with its own variance and crit rolls |
-| Perp Panther | Open Interest | +500 bps crit at the end of each round it is active, up to +2500 |
-| Ape Comet | Full Send | Always acts first in the round |
-| Basis Mantis | Hedge | `roll(100)` < 20 dodges an incoming hit |
-| Halving Hydra | Halving | Its hits halve the target's next heal |
+| Card              | Ability            | Exact rule                                                                                                    |
+| ----------------- | ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Pegshell          | Peg Shield         | The first hit it takes each round deals 0                                                                     |
+| Treasury Sentinel | Coupon             | End of round: heals 5% of max HP                                                                              |
+| Bondback Tortoise | Duration Lock      | Takes 90% of incoming damage                                                                                  |
+| Ledger Owl        | Audit              | Once per match, while active, the first enemy crit against any ally becomes a normal hit                      |
+| Vault Golem       | Safe Haven         | +10% DEF each time an ally faints, stacking to +30%                                                           |
+| Mint Sprite       | Redeem             | Once per match, end of round below 30% HP: swaps with the first living bench card, keeping its HP             |
+| Coupon Crab       | Hard Shell         | Reflects 10% of damage taken to the attacker                                                                  |
+| Reserve Bison     | Backstop           | Once per match, a lethal hit leaves it at 1 HP                                                                |
+| Aurum Lynx        | Gold Rush          | +10% ATK in round 1                                                                                           |
+| Yield Heron       | Accrue             | End of each round it is active: +2 ATK, up to +10                                                             |
+| Gilded Ram        | Charge             | Its first attack of the match ignores 50% of target DEF                                                       |
+| Rebalance Fox     | Rebalance          | Once per match, end of round: the lowest-HP ally active card below 40% swaps with the first living bench card |
+| Collateral Bear   | Overcollateral     | +15% DEF while below 50% HP                                                                                   |
+| Bullion Beetle    | Store of Value     | End of round: heals 3% of max HP                                                                              |
+| Basis Kestrel     | Arbitrage          | Uses the highest enemy active SPD if higher than its own                                                      |
+| Spread Serpent    | Widen              | Its hits set target DEF −10% for 2 rounds; refreshes, does not stack                                          |
+| Leverage Raptor   | 2x Long            | Each attack: `roll(100)` < 60 deals 2× damage; otherwise 0.5× and it takes 10% of its max HP                  |
+| Liquidation Wolf  | Liquidation Strike | After its hit, a target below 20% HP faints                                                                   |
+| Funding Wasp      | Funding Rate       | Heals 30% of damage it deals                                                                                  |
+| Loop Kraken       | Recursive Loop     | Attacks twice at 60% damage, each with its own variance and crit rolls                                        |
+| Perp Panther      | Open Interest      | +500 bps crit at the end of each round it is active, up to +2500                                              |
+| Ape Comet         | Full Send          | Always acts first in the round                                                                                |
+| Basis Mantis      | Hedge              | `roll(100)` < 20 dodges an incoming hit                                                                       |
+| Halving Hydra     | Halving            | Its hits halve the target's next heal                                                                         |
 
 **Output**
 
@@ -594,16 +594,16 @@ The biggest risk is legal, not technical: staked matches and battle royale pots 
 
 ### Risks
 
-| Risk | Impact | Mitigation |
-| --- | --- | --- |
-| Staked play classed as gambling (Malaysia and venue countries) | Launch blocked, venue liability | Legal opinion first; Rank-only default; geofence staked modes; event pots as sponsor-funded prizes where required |
-| Yield vaults classed as an investment product | Licensing duties | Use third-party protocols as the yield source; clear risk disclosures; legal review |
-| RWA counterparty or redemption delay | Withdrawals slow or lossy | Diversify adapters; show redemption delay before deposit; per-vault caps |
-| Smart contract exploit | Loss of funds | Audits, bug bounty, pause guardian, caps in season 1 |
-| Oracle error | Unfair matches or bad vault pricing | Price bands, ±10% weather cap, fallback feed |
-| Collusion and multi-accounting | Yield laundering, rank farming | Stake rules in Game design, integrity jobs, account age gates |
-| Whale or meta dominance | Churn of new players | Equal power budget, level cap, tier balance patches each season |
-| Low yield makes stakes feel tiny | Weak excitement | Pots aggregate across events and seasons; cosmetics and rank carry status |
+| Risk                                                           | Impact                              | Mitigation                                                                                                        |
+| -------------------------------------------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Staked play classed as gambling (Malaysia and venue countries) | Launch blocked, venue liability     | Legal opinion first; Rank-only default; geofence staked modes; event pots as sponsor-funded prizes where required |
+| Yield vaults classed as an investment product                  | Licensing duties                    | Use third-party protocols as the yield source; clear risk disclosures; legal review                               |
+| RWA counterparty or redemption delay                           | Withdrawals slow or lossy           | Diversify adapters; show redemption delay before deposit; per-vault caps                                          |
+| Smart contract exploit                                         | Loss of funds                       | Audits, bug bounty, pause guardian, caps in season 1                                                              |
+| Oracle error                                                   | Unfair matches or bad vault pricing | Price bands, ±10% weather cap, fallback feed                                                                      |
+| Collusion and multi-accounting                                 | Yield laundering, rank farming      | Stake rules in Game design, integrity jobs, account age gates                                                     |
+| Whale or meta dominance                                        | Churn of new players                | Equal power budget, level cap, tier balance patches each season                                                   |
+| Low yield makes stakes feel tiny                               | Weak excitement                     | Pots aggregate across events and seasons; cosmetics and rank carry status                                         |
 
 ### Open questions
 
@@ -616,13 +616,13 @@ The biggest risk is legal, not technical: staked matches and battle royale pots 
 
 ### Roadmap
 
-| Phase | Timeline | Scope | Gate to move on |
-| --- | --- | --- | --- |
-| 0. Prototype | Weeks 1–4 | Engine, 1v1 Rank-only, testnet vaults | Matches feel fun in playtests with 30 players |
-| 1. Closed beta | Weeks 5–10 | Mainnet vaults with caps, escrow, settlement, withdraw | Audit passed; legal opinion received |
-| 2. Event pilot | Weeks 11–14 | Battle royale at 1–2 campus events, organizer console | Check-in under 3 minutes; zero disputes unresolved |
-| 3. Season 1 | Weeks 15–22 | Market Weather, battle pass, quests, clans | D7 retention at or above 25% |
-| 4. Scale | After season 1 | Ghost battles, spectator, more strategies and cities | Healthy tier win rates and TVL retention |
+| Phase          | Timeline       | Scope                                                  | Gate to move on                                    |
+| -------------- | -------------- | ------------------------------------------------------ | -------------------------------------------------- |
+| 0. Prototype   | Weeks 1–4      | Engine, 1v1 Rank-only, testnet vaults                  | Matches feel fun in playtests with 30 players      |
+| 1. Closed beta | Weeks 5–10     | Mainnet vaults with caps, escrow, settlement, withdraw | Audit passed; legal opinion received               |
+| 2. Event pilot | Weeks 11–14    | Battle royale at 1–2 campus events, organizer console  | Check-in under 3 minutes; zero disputes unresolved |
+| 3. Season 1    | Weeks 15–22    | Market Weather, battle pass, quests, clans             | D7 retention at or above 25%                       |
+| 4. Scale       | After season 1 | Ghost battles, spectator, more strategies and cities   | Healthy tier win rates and TVL retention           |
 
 ### Sources
 
