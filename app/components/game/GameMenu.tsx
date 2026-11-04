@@ -19,19 +19,10 @@ function Logo({ small = false }: { small?: boolean }) {
 
 /** Title screen: shown once per browser session, then the menu takes over until the tab is closed. */
 export function StartScreen({ onStart }: { onStart: () => void }) {
-  const fan = [4, 2, 15, 10, 16];
   return (
-    <button className="start-screen" onClick={onStart} aria-label="Tap to start">
+    <button className="start-screen start-banner-screen" onClick={onStart} aria-label="Tap to start">
       <link rel="stylesheet" href={FONT} />
-      <div className="start-rays" aria-hidden />
-      <div className="start-fan" aria-hidden>
-        {fan.map((id, i) => (
-          <div key={id} className="start-fan-card" style={{ "--i": i - 2 } as React.CSSProperties}>
-            <HoloCard rarity="Holo Rare"><img src={cardById(id).src} alt="" draggable={false} /></HoloCard>
-          </div>
-        ))}
-      </div>
-      <Logo />
+      <img className="start-banner" src="/cardsdotgg-banner.jpg" alt="Cardsdotgg: collect, build, battle" draggable={false} />
       <span className="start-tap">Tap to start</span>
     </button>
   );
