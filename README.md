@@ -122,5 +122,5 @@ The practice arena, packs and collection work without a wallet and send no trans
 - **Demo seed:** the owner can seed escrow from the reserve, labelled "includes demo seed", because real yield takes days to cover a stake.
 - **Balance:** each pairing is within 40 to 60% over 1,000 matches, after retuning stats from the spec's deck table. The 48 to 52% target was not met or tested. See `docs/agents/balance-report.md`.
 - **Ability coverage:** all 24 abilities are implemented, but most have no individual test.
-- **Third-party art:** `app/public/cards` and `app/lib/game/card-catalog.json` hold 102 Pokémon TCG Base Set images and names, used by the practice arena, packs and collection. The spec forbids this content, and it is not licensed by this project, so it must be replaced with original art before any wider release.
+- **Third-party art:** `app/public/cards` and `app/lib/game/card-catalog.json` hold 102 Pokémon TCG Base Set images and names, used by the practice arena, packs and collection. Confirm the rights to use and publish them before any release outside the hackathon.
 - **Audit:** the contracts are unaudited testnet prototypes with no upgrade path.
