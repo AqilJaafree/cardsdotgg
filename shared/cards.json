@@ -1,0 +1,33 @@
+{
+  "tiers": [
+    { "id": 0, "name": "Guardian", "critBps": 500, "critMul": 130 },
+    { "id": 1, "name": "Balanced", "critBps": 1200, "critMul": 150 },
+    { "id": 2, "name": "Degen", "critBps": 2500, "critMul": 180 }
+  ],
+  "cards": [
+    { "id": 0, "tier": 0, "name": "Pegshell", "assetClass": "Stable", "hp": 40, "atk": 15, "def": 35, "spd": 10, "ability": "Peg Shield", "rule": "The first hit it takes each round deals 0", "implemented": true },
+    { "id": 1, "tier": 0, "name": "Treasury Sentinel", "assetClass": "Treasury", "hp": 38, "atk": 18, "def": 32, "spd": 12, "ability": "Coupon", "rule": "End of round: heals 5% of max HP", "implemented": true },
+    { "id": 2, "tier": 0, "name": "Bondback Tortoise", "assetClass": "Treasury", "hp": 42, "atk": 14, "def": 34, "spd": 10, "ability": "Duration Lock", "rule": "Takes 90% of incoming damage", "implemented": true },
+    { "id": 3, "tier": 0, "name": "Ledger Owl", "assetClass": "Stable", "hp": 30, "atk": 22, "def": 26, "spd": 22, "ability": "Audit", "rule": "Once per match, while active, the first enemy crit against any ally becomes a normal hit", "implemented": true },
+    { "id": 4, "tier": 0, "name": "Vault Golem", "assetClass": "Gold", "hp": 36, "atk": 24, "def": 30, "spd": 10, "ability": "Safe Haven", "rule": "+10% DEF each time an ally faints, stacking to +30%", "implemented": true },
+    { "id": 5, "tier": 0, "name": "Mint Sprite", "assetClass": "Stable", "hp": 28, "atk": 24, "def": 24, "spd": 24, "ability": "Redeem", "rule": "Once per match, end of round below 30% HP: swaps with the first living bench card, keeping its HP", "implemented": true },
+    { "id": 6, "tier": 0, "name": "Coupon Crab", "assetClass": "Credit", "hp": 34, "atk": 22, "def": 30, "spd": 14, "ability": "Hard Shell", "rule": "Reflects 10% of damage taken to the attacker", "implemented": true },
+    { "id": 7, "tier": 0, "name": "Reserve Bison", "assetClass": "Treasury", "hp": 38, "atk": 26, "def": 26, "spd": 10, "ability": "Backstop", "rule": "Once per match, a lethal hit leaves it at 1 HP", "implemented": true },
+    { "id": 8, "tier": 1, "name": "Aurum Lynx", "assetClass": "Gold", "hp": 28, "atk": 30, "def": 20, "spd": 22, "ability": "Gold Rush", "rule": "+10% ATK in round 1", "implemented": true },
+    { "id": 9, "tier": 1, "name": "Yield Heron", "assetClass": "Credit", "hp": 30, "atk": 28, "def": 22, "spd": 20, "ability": "Accrue", "rule": "End of each round it is active: +2 ATK, up to +10", "implemented": true },
+    { "id": 10, "tier": 1, "name": "Gilded Ram", "assetClass": "Gold", "hp": 32, "atk": 28, "def": 26, "spd": 14, "ability": "Charge", "rule": "Its first attack of the match ignores 50% of target DEF", "implemented": true },
+    { "id": 11, "tier": 1, "name": "Rebalance Fox", "assetClass": "Credit", "hp": 26, "atk": 28, "def": 18, "spd": 28, "ability": "Rebalance", "rule": "Once per match, end of round: the lowest-HP ally active card below 40% swaps with the first living bench card", "implemented": true },
+    { "id": 12, "tier": 1, "name": "Collateral Bear", "assetClass": "Credit", "hp": 34, "atk": 26, "def": 28, "spd": 12, "ability": "Overcollateral", "rule": "+15% DEF while below 50% HP", "implemented": true },
+    { "id": 13, "tier": 1, "name": "Bullion Beetle", "assetClass": "Gold", "hp": 30, "atk": 24, "def": 30, "spd": 16, "ability": "Store of Value", "rule": "End of round: heals 3% of max HP", "implemented": true },
+    { "id": 14, "tier": 1, "name": "Basis Kestrel", "assetClass": "Treasury", "hp": 26, "atk": 30, "def": 20, "spd": 24, "ability": "Arbitrage", "rule": "Uses the highest enemy active SPD if higher than its own", "implemented": true },
+    { "id": 15, "tier": 1, "name": "Spread Serpent", "assetClass": "Credit", "hp": 28, "atk": 32, "def": 18, "spd": 22, "ability": "Widen", "rule": "Its hits set target DEF -10% for 2 rounds; refreshes, does not stack", "implemented": true },
+    { "id": 16, "tier": 2, "name": "Leverage Raptor", "assetClass": "BTC", "hp": 20, "atk": 42, "def": 10, "spd": 28, "ability": "2x Long", "rule": "Each attack: 60% chance of 2x damage; otherwise 0.5x and it takes 10% of its max HP", "implemented": true },
+    { "id": 17, "tier": 2, "name": "Liquidation Wolf", "assetClass": "BTC", "hp": 22, "atk": 40, "def": 12, "spd": 26, "ability": "Liquidation Strike", "rule": "After its hit, a target below 20% HP faints", "implemented": true },
+    { "id": 18, "tier": 2, "name": "Funding Wasp", "assetClass": "BTC", "hp": 18, "atk": 38, "def": 8, "spd": 36, "ability": "Funding Rate", "rule": "Heals 30% of damage it deals", "implemented": true },
+    { "id": 19, "tier": 2, "name": "Loop Kraken", "assetClass": "Credit", "hp": 26, "atk": 38, "def": 14, "spd": 22, "ability": "Recursive Loop", "rule": "Attacks twice at 60% damage, each with its own variance and crit rolls", "implemented": true },
+    { "id": 20, "tier": 2, "name": "Perp Panther", "assetClass": "BTC", "hp": 20, "atk": 40, "def": 10, "spd": 30, "ability": "Open Interest", "rule": "+500 bps crit at the end of each round it is active, up to +2500", "implemented": true },
+    { "id": 21, "tier": 2, "name": "Ape Comet", "assetClass": "BTC", "hp": 16, "atk": 44, "def": 8, "spd": 32, "ability": "Full Send", "rule": "Always acts first in the round", "implemented": true },
+    { "id": 22, "tier": 2, "name": "Basis Mantis", "assetClass": "Credit", "hp": 24, "atk": 36, "def": 14, "spd": 26, "ability": "Hedge", "rule": "20% chance to dodge an incoming hit", "implemented": true },
+    { "id": 23, "tier": 2, "name": "Halving Hydra", "assetClass": "BTC", "hp": 24, "atk": 38, "def": 12, "spd": 26, "ability": "Halving", "rule": "Its hits halve the target's next heal", "implemented": true }
+  ]
+}
