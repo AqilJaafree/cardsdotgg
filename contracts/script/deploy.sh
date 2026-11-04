@@ -8,5 +8,5 @@ RPC=${MONAD_TESTNET_RPC_URL:-https://testnet-rpc.monad.xyz}
 GOLD_PRICE_USD_1E6=$(node -p "require('../shared/liquidity-source.json').usdPerGold1e6")
 POOL_VALUE_USD_1E6=$(node -p "require('../shared/liquidity-source.json').reserveValueUsd1e6")
 export GOLD_PRICE_USD_1E6 POOL_VALUE_USD_1E6
-forge script script/Deploy.s.sol --rpc-url "$RPC" --broadcast --slow --non-interactive 2>&1 | grep -vE 'PRIVATE|"(deployer|keeper)"' | tail -25
+forge script script/Deploy.s.sol --rpc-url "$RPC" --broadcast --slow --non-interactive --with-gas-price 104gwei --priority-gas-price 2gwei --gas-estimate-multiplier 115 2>&1 | grep -vE 'PRIVATE|"(deployer|keeper)"' | tail -25
 node script/export-abi.mjs
