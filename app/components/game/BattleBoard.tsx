@@ -30,7 +30,7 @@ export default function BattleBoard({state,tier,opponentName="ASTER",onInspect,o
     <div className={`energy-zone ${state.energyUsed?"spent":""}`}><Energy tier={tier}/><small>ENERGY</small></div>
     <div className="player-hand">{state.player.hand.map((id,i)=><button key={`${i}-${id}`} style={{"--deal-index":i,"--card-angle":`${(i-(state.player.hand.length-1)/2)*9}deg`,"--card-y":`${Math.abs(i-(state.player.hand.length-1)/2)*7}px`} as React.CSSProperties} onClick={()=>onInspect([id])} aria-label={`Inspect ${cardById(id).name}`}><img src={cardById(id).src} alt={cardById(id).name} draggable={false}/></button>)}</div>
     <div className="player-strip own-strip"><span className="avatar own-avatar"><Hexagon size={15}/></span><div><b>YOU</b><small>{["Guardian","Balanced","Degen"][tier]}</small></div><div className="score-pips">{[0,1,2].map(i=><i key={i} className={state.player.points>i?"scored":""}>{state.player.points>i?"✦":""}</i>)}</div></div>
-    {banner&&<div className={`turn-banner ${banner.includes("opponent")?"enemy-turn":""}`} key={banner}>{banner}<small>{banner.includes("turn")?`Current turn: ${banner.includes("opponent")?state.turn*2:state.turn*2-1}`:"YIELDDECK ARENA"}</small></div>}
+    {banner&&<div className={`turn-banner ${banner.includes("opponent")?"enemy-turn":""}`} key={banner}>{banner}<small>{banner.includes("turn")?`Current turn: ${banner.includes("opponent")?state.turn*2:state.turn*2-1}`:"CARDSDOTGG ARENA"}</small></div>}
     <BattleEffects event={effect}/>
     {children}
   </div>;

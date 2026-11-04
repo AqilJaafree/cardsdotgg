@@ -34,6 +34,9 @@ export default function Pool() {
   const [rT, rG] = (rv.data as readonly [bigint, bigint] | undefined) ?? [0n, 0n];
   const [pS, pT, pG] = (pos.data as readonly [bigint, bigint, bigint] | undefined) ?? [0n, 0n, 0n];
   const tIn = parse(tusd, 6), gIn = parse(gold, 18);
+  // The pool takes tokens at its own ratio, so slippage limits must use what it will actually take, not what was typed.
+  const gOptimal = rT > 0n ? (tIn * rG) / rT : gIn;
+  const [useT, useG] = gOptimal <= gIn ? [tIn, gOptimal] : [rG > 0n ? (gIn * rT) / rG : tIn, gIn];
   const sDec = swapAsset === 0 ? 6 : 18;
   const sAmt = parse(swapIn, sDec);
   const quote = useReadContract({ address: pool, abi: abis.pool, functionName: "quoteSwap", args: [swapAsset, sAmt], query: { enabled: sAmt > 0n && rT > 0n } });
@@ -63,10 +66,11 @@ export default function Pool() {
       <div className="card">
         <h3>1. Add liquidity</h3>
         <input value={tusd} onChange={(e) => setTusd(e.target.value)} /> tUSD <input value={gold} onChange={(e) => setGold(e.target.value)} /> tGOLD
+        <p><small>At the pool price this adds about {u(useT, 6)} tUSD and {u(useG, 18)} tGOLD. Any extra stays in your wallet.</small></p>
         <Allowance token="tUSD" spender={pool} need={tIn} onDone={() => {}} />
         <Allowance token="tGOLD" spender={pool} need={gIn} onDone={() => {}} />
         <TxButton label="Add liquidity" disabled={!address || tIn === 0n || gIn === 0n || !okT(tIn) || !okG(gIn)} onConfirmed={refetch}
-          request={{ address: pool, abi: abis.pool, functionName: "addLiquidity", args: [tIn, gIn, slipMin(tIn, slip), slipMin(gIn, slip)] }} />
+          request={{ address: pool, abi: abis.pool, functionName: "addLiquidity", args: [tIn, gIn, slipMin(useT, slip), slipMin(useG, slip)] }} />
       </div>
       <div className="card">
         <h3>2. Swap</h3>
