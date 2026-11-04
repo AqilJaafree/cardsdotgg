@@ -3,21 +3,17 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { createPublicClient, createWalletClient, http, parseAbi, defineChain, type Address } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { AAVE_POOL, GOLD_POOL, GOLD_POOL_SOURCE, SOURCES, VOLUME_API } from "./sources.js";
-import { annualizeBps, assertSaneGold, clampBps, priceFromSqrt, rayToBps } from "./computeRates.js";
+import { GOLD_POOL, GOLD_POOL_SOURCE, VOLUME_API } from "./sources.js";
+import { POSITIONS, readPosition } from "./positions.js";
+import { assertSaneGold, clampBps, priceFromSqrt } from "./computeRates.js";
 
 const root = new URL("../../", import.meta.url);
 const dry = process.argv.includes("--dry");
-const SEVEN_DAYS = 604_800n;
 
 const mainnet = createPublicClient({
   transport: http(process.env.MONAD_MAINNET_RPC_URL || "https://rpc-mainnet.monadinfra.com"),
 });
 
-const poolAbi = parseAbi([
-  "function getReserveData(address) view returns (uint256,uint128,uint128,uint128,uint128,uint128,uint40,uint16,address)",
-]);
-const vaultAbi = parseAbi(["function convertToAssets(uint256) view returns (uint256)", "function decimals() view returns (uint8)"]);
 const oracleAbi = parseAbi(["function setRates(uint16,uint16,uint16,uint64)", "function setGoldPrice(uint256)"]);
 const v3Abi = parseAbi([
   "function slot0() view returns (uint160,int24,uint16,uint16,uint16,uint32,bool)",
@@ -83,43 +79,28 @@ async function readGoldPool(blockNumber: bigint, readAt: string) {
   };
 }
 
-async function blockSevenDaysAgo(latest: bigint, latestTime: bigint) {
-  const probe = await mainnet.getBlock({ blockNumber: latest - 1_000_000n });
-  const span = latestTime - probe.timestamp;
-  return mainnet.getBlock({ blockNumber: latest - (SEVEN_DAYS * 1_000_000n) / span });
-}
-
 async function main() {
   const head = await mainnet.getBlock();
   if ((await mainnet.getChainId()) !== 143) throw new Error("mainnet RPC is not chain 143");
-  const old = await blockSevenDaysAgo(head.number, head.timestamp);
   const readAt = new Date().toISOString();
 
   const entries = [];
-  for (const s of SOURCES) {
-    let bps: number;
-    if (s.kind === "aave") {
-      const d = await mainnet.readContract({ address: AAVE_POOL, abi: poolAbi, functionName: "getReserveData", args: [s.asset] });
-      bps = rayToBps(d[2]);
-    } else {
-      const decimals = await mainnet.readContract({ address: s.vault, abi: vaultAbi, functionName: "decimals" });
-      const one = 10n ** BigInt(decimals);
-      const read = (blockNumber: bigint) =>
-        mainnet.readContract({ address: s.vault, abi: vaultAbi, functionName: "convertToAssets", args: [one], blockNumber });
-      bps = annualizeBps(await read(old.number), await read(head.number), head.timestamp - old.timestamp);
-    }
+  for (const pos of POSITIONS) {
+    const r = await readPosition(mainnet as never, pos, head);
     entries.push({
-      tier: s.tier,
-      bps: clampBps(bps),
+      tier: pos.tier,
+      bps: clampBps(r.bps),
+      rawBps: r.bps,
       live: true,
-      source: s.source,
-      sourceContract: s.kind === "aave" ? AAVE_POOL : s.vault,
-      sourceUrl: s.sourceUrl,
-      note: s.note,
+      source: `Uniswap V${r.version} ${r.label} position #${r.positionId}`,
+      sourceContract: r.pool,
+      sourceUrl: r.positionUrl,
+      note: "Estimated fees this position's price range earned over the trailing window, annualized from sampled pool fee growth. Ignores impermanent loss, and is not what this position has itself earned so far. Capped at 50%.",
+      ...r,
       readAt,
       mainnetBlock: head.number.toString(),
     });
-    console.log(`tier ${s.tier}: ${bps} bps from ${s.source}`);
+    console.log(`tier ${pos.tier}: ${r.bps} bps, ${r.label} v${r.version} #${r.positionId}, inRange=${r.inRange}, ${r.intervalsInRange}/${r.samples} intervals, ${r.windowDays}d, value $${r.positionValueUsd}, owner ${r.owner}`);
   }
 
   writeFileSync(new URL("shared/rate-sources.json", root), JSON.stringify(entries, null, 2) + "\n");
