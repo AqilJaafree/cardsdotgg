@@ -1,22 +1,18 @@
 import "./globals.css";
+import "@/components/game/battle-animation.css";
 import type { Metadata } from "next";
 import { Providers } from "@/components/Providers";
-import { ConnectBar } from "@/components/ConnectBar";
-import { NetworkGuard } from "@/components/NetworkGuard";
+import AppShell from "@/components/game/AppShell";
 import { BRAND } from "@/lib/brand";
 
-export const metadata: Metadata = { title: BRAND, description: "Yield-funded card battles on Monad testnet" };
+export const metadata: Metadata = { title: `${BRAND} — Every card. A new possibility.`, description: "Discover your cards, enter the arena, and find a little magic in every pack." };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <Providers>
-          <ConnectBar />
-          <main>
-            <NetworkGuard>{children}</NetworkGuard>
-          </main>
-          <footer>Testnet prototype. tUSD and tGOLD are testnet tokens; yield payouts are reserve-funded.</footer>
+          <AppShell>{children}</AppShell>
         </Providers>
       </body>
     </html>

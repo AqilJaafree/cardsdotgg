@@ -14,6 +14,7 @@ export function ConnectBar() {
         <Link href="/deposit">Deposit</Link>
         <Link href="/decks">Decks</Link>
         <Link href="/arena">Arena</Link>
+        <Link href="/pool">Pool</Link>
         <Link href="/withdraw">Withdraw</Link>
       </nav>
       {isConnected ? (
