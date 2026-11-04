@@ -9,7 +9,7 @@ export const decks = [
   { name: "Degen", subtitle: "Fortune favors the bold", color: "#de7359", symbol: "flame", cards: [4, 10, 12, 6, 8, 7, 5, 11], pack: "/cards/pack-degen.svg" },
 ] as const;
 export const starterCards = [...new Set(decks.flatMap((deck) => [...deck.cards]))];
-export const COLLECTION_KEY = "yielddeck.reference-collection.v1";
+export const COLLECTION_KEY = "cardsdotgg.reference-collection.v1";
 export function readCollection(): Record<string, number> {
   const initial = Object.fromEntries(starterCards.map((id) => [id, 1]));
   try {
@@ -22,7 +22,7 @@ export function collectCards(ids: number[]) {
   const owned = readCollection();
   ids.forEach((id) => { owned[id] = (owned[id] ?? 0) + 1; });
   localStorage.setItem(COLLECTION_KEY, JSON.stringify(owned));
-  window.dispatchEvent(new Event("yielddeck:collection"));
+  window.dispatchEvent(new Event("cardsdotgg:collection"));
 }
 function pick<T>(items: T[]): T {
   const random = new Uint32Array(1);

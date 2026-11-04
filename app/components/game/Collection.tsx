@@ -9,7 +9,7 @@ import {useDecks} from "@/lib/useDecks";
 const CardTheater=dynamic(()=>import("./CardTheater"),{ssr:false});
 export default function Collection(){
   const [owned,setOwned]=useState<Record<string,number>>({}),[query,setQuery]=useState(""),[filter,setFilter]=useState("All cards"),[onlyOwned,setOnlyOwned]=useState(false),[inspect,setInspect]=useState<number[]|null>(null);
-  useEffect(()=>{const load=()=>setOwned(readCollection());load();window.addEventListener("yielddeck:collection",load);window.addEventListener("storage",load);return()=>{window.removeEventListener("yielddeck:collection",load);window.removeEventListener("storage",load);};},[]);
+  useEffect(()=>{const load=()=>setOwned(readCollection());load();window.addEventListener("cardsdotgg:collection",load);window.addEventListener("storage",load);return()=>{window.removeEventListener("cardsdotgg:collection",load);window.removeEventListener("storage",load);};},[]);
   const {decks:chainDecks}=useDecks();
   const onchain=new Set<number>(chainDecks.filter(d=>!d.retired).flatMap(d=>[...(tierDecks[d.tier]?.cards??[])]));
   const has=(id:number)=>!!owned[id]||onchain.has(id);

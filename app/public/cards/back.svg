@@ -17,9 +17,9 @@
 <circle cx="300" cy="412" r="84" fill="#0b3186"/>
 <path d="M254 372h36l25 40 25-40h36l-44 66v27h-34v-27z" transform="translate(-15 -5)" fill="url(#silver)"/>
 <circle cx="300" cy="412" r="130" fill="none" stroke="#96f0ff" stroke-width="2"/>
-<text x="300" y="132" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="43" letter-spacing="3" fill="#08215f" stroke="#08215f" stroke-width="10" paint-order="stroke">YIELDDECK</text>
-<text x="300" y="132" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="43" letter-spacing="3" fill="#eefaff">YIELDDECK</text>
+<text x="300" y="132" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="43" letter-spacing="3" fill="#08215f" stroke="#08215f" stroke-width="10" paint-order="stroke">CARDSDOTGG</text>
+<text x="300" y="132" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="43" letter-spacing="3" fill="#eefaff">CARDSDOTGG</text>
 <text x="300" y="167" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" letter-spacing="8" fill="#a1dbff">COLLECT · BATTLE · RISE</text>
-<g transform="rotate(180 300 412.5)"><text x="300" y="132" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="43" letter-spacing="3" fill="#eefaff">YIELDDECK</text><text x="300" y="167" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" letter-spacing="8" fill="#a1dbff">COLLECT · BATTLE · RISE</text></g>
+<g transform="rotate(180 300 412.5)"><text x="300" y="132" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="43" letter-spacing="3" fill="#eefaff">CARDSDOTGG</text><text x="300" y="167" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" letter-spacing="8" fill="#a1dbff">COLLECT · BATTLE · RISE</text></g>
 <g fill="#e5ffff"><path d="M123 238l3 12 12 3-12 3-3 12-3-12-12-3 12-3z"/><path d="M477 572l3 12 12 3-12 3-3 12-3-12-12-3 12-3z"/><circle cx="449" cy="256" r="2.5"/><circle cx="151" cy="569" r="2.5"/><circle cx="95" cy="457" r="2"/><circle cx="505" cy="368" r="2"/></g>
 </svg>
