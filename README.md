@@ -76,6 +76,29 @@ pnpm dry       # read mainnet only
 pnpm run-once  # read mainnet and write to the oracle
 ```
 
+## Local animated game
+
+- `/`: three-round practice bracket with computer opponents, a Three.js card showcase before every practice battle, versus introduction, opening coin, animated dealing, attacks, energy attachment, bench switches, knockouts, points, and victory.
+- `/packs`: separate free pack carousel, seal opening, card reveals, and collection storage in this browser. Packs do not affect battles or send transactions.
+- `/collection`: search and inspect all 102 supplied Base Set cards, with collected-card counts.
+- `/arena` and `/match/[id]`: the existing onchain challenge and contract replay flows.
+
+React owns the controls and game state; Three.js renders card and pack scenes; Phaser renders the battle effects through WebGL with a canvas fallback. The layout supports desktop and mobile, with an optional focused portrait arena. Sound is opt-in, and reduced-motion preferences are respected.
+
+Supplied videos guide the visual choreography. This is a reference-inspired implementation, not a pixel-identical recreation or a complete Pokémon TCG rules engine. Practice uses simplified damage, automatic reserve promotion, and first-to-three scoring. Practice state and cards are separate from the onchain YieldDeck engine and its deck NFTs.
+
+```bash
+cd app
+pnpm dev --port 3002
+pnpm test:game
+pnpm typecheck
+pnpm build
+```
+
+Card images are checked into `app/public/cards`. To refresh them from a local reference folder, run `node app/scripts/import-reference-cards.mjs /path/to/base1`. The importer preserves the provided artwork; pack wrappers and the YieldDeck card back are local SVG assets.
+
+The practice arena, packs and collection work without a wallet and send no transactions.
+
 ## Repo layout
 
 | Path | Contents |
@@ -99,4 +122,5 @@ pnpm run-once  # read mainnet and write to the oracle
 - **Demo seed:** the owner can seed escrow from the reserve, labelled "includes demo seed", because real yield takes days to cover a stake.
 - **Balance:** each pairing is within 40 to 60% over 1,000 matches, after retuning stats from the spec's deck table. The 48 to 52% target was not met or tested. See `docs/agents/balance-report.md`.
 - **Ability coverage:** all 24 abilities are implemented, but most have no individual test.
+- **Third-party art:** `app/public/cards` and `app/lib/game/card-catalog.json` hold 102 Pokémon TCG Base Set images and names, used by the practice arena, packs and collection. The spec forbids this content, and it is not licensed by this project, so it must be replaced with original art before any wider release.
 - **Audit:** the contracts are unaudited testnet prototypes with no upgrade path.
