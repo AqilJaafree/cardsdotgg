@@ -12,6 +12,8 @@ export default function AppShell({children}:{children:React.ReactNode}){
   const {address,isConnected}=useAccount();
   const {ready,authenticated,login,logout}=usePrivy();
   const [walletOpen,setWalletOpen]=useState(false);
+  // The owner's stats page has its own key, so it skips the sign-in screen and the site chrome.
+  if(path.startsWith("/stats"))return <>{children}</>;
   // Every screen needs a connected wallet: until one is connected, only the connect screen shows.
   if(!authenticated)return <><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"/>
     <div className="wallet-gate">

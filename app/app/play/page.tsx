@@ -7,6 +7,7 @@ import { zeroAddress } from "viem";
 import { TxButton } from "@/components/TxButton";
 import { abis, ad, TIERS } from "@/lib/contracts";
 import { useDecks } from "@/lib/useDecks";
+import { track } from "@/lib/track";
 import { OnchainBattle, SearchingAnim, StarterPack, VsSlam } from "@/components/game/OnlineBattle";
 
 /** How many recent matches to scan for open challenges and the player's own matches. */
@@ -106,6 +107,11 @@ function QuickMatch() {
   useEffect(() => { if (inPlay) setWatchId(inPlay.id); }, [inPlay?.id]); // eslint-disable-line
   const settled = watchId !== null ? rows.find((r) => r.id === watchId && Number(r.m.status) === 3) : undefined;
   useEffect(() => { if (settled && stage === "none") setStage("replay"); }, [!!settled]); // eslint-disable-line
+  useEffect(() => {
+    if (stage !== "result" || !settled) return;
+    const outcome = settled.m.winner === zeroAddress ? "draw" : settled.m.winner?.toLowerCase() === me ? "won" : "lost";
+    track("action", { name: practice ? "practice result" : "match result", detail: `#${settled.id} ${outcome}` });
+  }, [stage]); // eslint-disable-line
 
   const top = (
     <header className="qm-top">

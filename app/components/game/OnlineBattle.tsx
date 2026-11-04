@@ -6,6 +6,7 @@ import { parseEther } from "viem";
 import { abis, ad, cards, TIERS } from "@/lib/contracts";
 import { cardById, decks as artDecks } from "@/lib/game/catalog";
 import HoloCard from "./HoloCard";
+import { track } from "@/lib/track";
 import BattleBoard from "./BattleBoard";
 import { AttackCinematic, BattleOpening } from "./BattleChoreography";
 import type { EffectEvent } from "./BattleEffects";
@@ -70,6 +71,7 @@ export function StarterPack({ onDone }: { onDone: () => void }) {
     setErr("");
     const t = crypto.getRandomValues(new Uint8Array(1))[0] % 3;
     setTier(t);
+    track("action", { name: "starter pack opened" });
     try {
       setStep("gas");
       await fetch("/api/starter", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ address }) }).catch(() => null);
@@ -86,10 +88,13 @@ export function StarterPack({ onDone }: { onDone: () => void }) {
       if (allowance < AMOUNT) await send("approve", { address: ad("tUSD"), abi: abis.token, functionName: "approve", args: [ad("deckVault"), AMOUNT] });
       await send("mint", { address: ad("deckVault"), abi: abis.vault, functionName: "deposit", args: [0, AMOUNT, t] });
       setStep("reveal");
+      track("action", { name: "starter pack minted", detail: TIERS[t] });
       setTimeout(onDone, 3200);
     } catch (e) {
       setStep("idle");
-      setErr((e as { shortMessage?: string }).shortMessage ?? (e instanceof Error ? e.message.split("\n")[0] : "Something went wrong."));
+      const msg = (e as { shortMessage?: string }).shortMessage ?? (e instanceof Error ? e.message.split("\n")[0] : "Something went wrong.");
+      setErr(msg);
+      track("action", { name: "starter pack failed", detail: msg.slice(0, 160) });
     }
   }
 

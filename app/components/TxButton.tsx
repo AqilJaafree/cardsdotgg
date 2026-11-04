@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import { explorerTx } from "@/lib/chain";
+import { track } from "@/lib/track";
 
 type Req = Parameters<ReturnType<typeof useWriteContract>["writeContract"]>[0];
 
@@ -12,7 +13,12 @@ export function TxButton({
   const { writeContract, data: hash, isPending, error, reset } = useWriteContract();
   const rcpt = useWaitForTransactionReceipt({ hash });
 
-  useEffect(() => { if (rcpt.isSuccess && hash) onConfirmed?.(hash); }, [rcpt.isSuccess, hash]); // eslint-disable-line
+  useEffect(() => {
+    if (!rcpt.isSuccess || !hash) return;
+    track(rcpt.data?.status === "reverted" ? "tx_error" : "tx", { label, fn: request.functionName, hash, message: rcpt.data?.status === "reverted" ? "reverted onchain" : undefined });
+    onConfirmed?.(hash);
+  }, [rcpt.isSuccess, hash]); // eslint-disable-line
+  useEffect(() => { if (error) track("tx_error", { label, fn: request.functionName, message: ((error as { shortMessage?: string }).shortMessage ?? error.message).slice(0, 160) }); }, [error]); // eslint-disable-line
 
   const status = isPending ? "Confirm in wallet…" : hash && rcpt.isLoading ? "Pending…" : label;
   const reverted = rcpt.data?.status === "reverted";

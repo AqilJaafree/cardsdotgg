@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { WagmiProvider } from "@privy-io/wagmi";
 import { monadTestnet, wagmiConfig } from "@/lib/chain";
+import { Tracker } from "@/components/Tracker";
 
 /** Privy handles sign-in (Google, or an external wallet); its wagmi adapter feeds that wallet to every contract call. */
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -20,7 +21,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       }}
     >
       <QueryClientProvider client={qc}>
-        <WagmiProvider config={wagmiConfig}>{children}</WagmiProvider>
+        <WagmiProvider config={wagmiConfig}><Tracker />{children}</WagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>
   );
