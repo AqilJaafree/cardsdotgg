@@ -1,1 +1,1 @@
-export const BRAND = "YieldDeck";
+export const BRAND = "Cardsdotgg";
