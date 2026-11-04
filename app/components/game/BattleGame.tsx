@@ -10,6 +10,8 @@ import BattleBoard, {Energy} from "./BattleBoard";
 import { AttackChoices, AttackCinematic, BattleOpening } from "./BattleChoreography";
 import { battleTiming, type AttackCue } from "@/lib/game/choreography";
 import type { EffectEvent } from "./BattleEffects";
+import { MainMenu, StartScreen } from "./GameMenu";
+const STARTED_KEY="cardsdotgg.started";
 const CardTheater=dynamic(()=>import("./CardTheater"),{ssr:false});
 type Log={text:string;kind:"attack"|"info"|"point"};
 const rounds=["Quarter-final","Semi-final","Grand final"];
@@ -18,6 +20,9 @@ const rivals=["ASTER","NOVA","SOL"];
 export default function BattleGame(){
   const [tier,setTier]=useState(0),[round,setRound]=useState(0),[phase,setPhase]=useState<"ready"|"intro"|"opening"|"battle"|"result">("ready");
   const [state,setState]=useState(()=>newBattle(decks[0].cards,decks[2].cards));
+  // The title screen shows once per browser session (sessionStorage), not on every refresh.
+  const [started,setStarted]=useState<boolean|null>(null);
+  useEffect(()=>{try{setStarted(sessionStorage.getItem(STARTED_KEY)==="1");}catch{setStarted(true);}},[]);
   const current=useRef(state);current.current=state;
   const [busy,setBusy]=useState(false),[banner,setBanner]=useState(""),[attack,setAttack]=useState<"player"|"opponent">(),[effect,setEffect]=useState<EffectEvent>();
   const [inspect,setInspect]=useState<number[]|null>(null),[logs,setLogs]=useState<Log[]>([]),[audio,setAudio]=useState(false),[point,setPoint]=useState<"player"|"opponent"|null>(null),[coin,setCoin]=useState(false);
@@ -92,7 +97,12 @@ export default function BattleGame(){
     wait(battleTiming.swap,()=>{setSwapping(false);setBusy(false);locked.current=false;});
   }
   const deck=decks[tier],inBattle=phase==="battle";
-  return <div className={`arena-page ${focused?"arena-focused":""} ${phase!=="ready"?"game-fullscreen":""}`}>
+  const menu=phase==="ready"?<div className="arena-page game-fullscreen game-menu">
+    {started===false&&<StartScreen onStart={()=>{try{sessionStorage.setItem(STARTED_KEY,"1");}catch{}setStarted(true);goFullscreen();sound("rare");}}/>}
+    {started!==null&&<MainMenu tier={tier} onTier={(t)=>reset(t)} onBattle={()=>begin(0)} audio={audio} onAudio={()=>{setAudio(!audio);enableSound(!audio);}}/>}
+  </div>:null;
+  if(menu)return menu;
+  return <div className={`arena-page ${focused?"arena-focused":""} game-fullscreen`}>
     <section className="arena-heading"><div><div className="eyebrow"><span className="live-dot"/>THE ARENA</div><h1>Every card. <span>A new possibility.</span></h1><p>Know your deck. Make your move. Be the last one standing.</p></div><div className="arena-heading-actions"><span className="local-badge">Local practice</span><button className="round-button" aria-label={focused?"Exit focused view":"Focus arena"} onClick={()=>setFocused(!focused)}>{focused?<Minimize2 size={17}/>:<Maximize2 size={17}/>}</button><button className="round-button" aria-label={audio?"Mute sound":"Enable sound"} onClick={()=>{setAudio(!audio);enableSound(!audio);}}>{audio?<Volume2 size={18}/>:<VolumeX size={18}/>}</button></div></section>
     <div className="arena-layout">
       <aside className="deck-sidebar"><div className="sidebar-label"><span>YOUR DECK</span><span>01 / 03</span></div><div className="tier-tabs">{decks.map((d,i)=><button key={d.name} disabled={phase!=="ready"} className={i===tier?"selected":""} onClick={()=>reset(i)}>{d.name}</button>)}</div>
