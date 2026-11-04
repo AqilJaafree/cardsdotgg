@@ -1,0 +1,20 @@
+{
+  "name": "yielddeck-app",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": { "sync": "node scripts/sync-shared.mjs", "predev": "node scripts/sync-shared.mjs", "prebuild": "node scripts/sync-shared.mjs", "dev": "next dev -p 3000", "build": "next build", "start": "next start", "typecheck": "tsc --noEmit" },
+  "dependencies": {
+    "@tanstack/react-query": "5.59.20",
+    "next": "14.2.18",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "viem": "2.21.45",
+    "wagmi": "2.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.6",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "typescript": "5.6.3"
+  }
+}

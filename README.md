@@ -1,15 +1,26 @@
-# Monad Blitz Devcon Mumbai Submission Process
+# YieldDeck
 
-## Steps to prepare your project repo:
+Yield-funded card battles on Monad testnet (chain 10143). Deposit testnet tokens, mint a deck NFT with an onchain SVG, and stake accrued yield in 1v1 battles. Principal never moves in a match. Battles are resolved onchain and the app replays the contract's own `simulateWithLog` output.
 
-1. Visit the `monad-blitz-devcon-mumbai` repo (link [here](https://github.com/monad-developers/monad-blitz-devcon-mumbai)) and fork it.
+## Live contracts (Monad testnet)
 
-![1.png](./screenshots/1.png)
+_Filled from `shared/addresses.json` after deploy._
 
-2. Give it your project name, a one-liner description, make sure you are forking `main` branch and click `Create Fork`
+## Prototype-only
 
-![2.png](https://github.com/monad-developers/monad-blitz-denver/raw/main/screenshots/2.png?raw=true)
+- Randomness is a blockhash seed (`seedBlock = block.number + 1`), labelled "prototype-only randomness".
+- tUSD and tGOLD are testnet tokens. Yield payouts are reserve-funded.
+- Escrow can include a demo seed funded by the contract owner from the reserve (labelled "includes demo seed").
+- A tier shows "source: Monad mainnet" only when `shared/rate-sources.json` marks it `live`; otherwise "demo rate, not live".
+- Cards whose ability is not implemented show "ability inactive".
+- The 48 to 52% balance criterion is not claimed; see `docs/agents/balance-report.md` for measured win rates.
 
-3. In your fork you can make all the changes you want, add code of your project, create branches, add information to `README.md` , you can change anything and everything.
+## Run the app
 
-4. For next steps head to [Blitz Portal](https://blitz.devnads.com)
+```bash
+cd app
+pnpm install --ignore-workspace
+pnpm dev   # syncs shared/ into app/lib/shared first
+```
+
+Needs a browser wallet on Monad Testnet with testnet MON. The app offers a one-click network switch.
