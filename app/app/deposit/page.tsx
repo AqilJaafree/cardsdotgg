@@ -6,7 +6,7 @@ import { TxButton } from "@/components/TxButton";
 import { Gate } from "@/components/NotDeployed";
 import { abis, ad, ASSETS, fmtGold, fmtUsd, TIERS } from "@/lib/contracts";
 
-const BLURB = ["Low risk, steady rate", "70/30 credit and gold mix", "High rate, high variance"];
+const BLURB = ["EURW/USDC Uniswap position", "USDC/WETH Uniswap position", "WMON/USDC Uniswap position"];
 
 export default function Deposit() {
   const { address } = useAccount();

@@ -12,16 +12,16 @@ function Row({ d, refetch }: { d: DeckView; refetch: () => void }) {
   const q = useReadContract({ address: ad("withdrawRouter"), abi: abis.router, functionName: "quote", args: [d.id, exit], query: { refetchInterval: 8000 } }).data as readonly [bigint, bigint] | undefined;
   const pOut = q?.[0] ?? 0n, eOut = q?.[1] ?? 0n;
   const fmtP = exit === 0 ? fmtUsd : fmtGold;
-  const minOut = (pOut * BigInt(Math.round((100 - Number(slip)) * 100))) / 10000n;
+  const minOut = ((pOut + eOut) * BigInt(Math.round((100 - Number(slip)) * 100))) / 10000n;
   const blocked = d.locked > 0n;
   return (
     <div className="card">
       <h3>{TIERS[d.tier]} Deck #{String(d.id)}</h3>
       <select value={exit} onChange={(e) => setExit(+e.target.value)}>{ASSETS.map((a, i) => <option key={a} value={i}>Exit as {a}</option>)}</select>{" "}
       slippage <input size={3} value={slip} onChange={(e) => setSlip(e.target.value)} />%
-      <p>You receive: {fmtP(pOut)} {ASSETS[exit]} principal + {fmtUsd(eOut)} tUSD escrow</p>
+      <p>You receive: {fmtP(pOut)} {ASSETS[exit]} principal + {fmtP(eOut)} {ASSETS[exit]} escrow</p>
       {blocked && <p className="err">A stake is locked ({fmtUsd(d.locked)} tUSD). Resolve or expire the match first.</p>}
-      <TxButton label="Withdraw all" disabled={blocked} onConfirmed={refetch}
+      <TxButton label="Withdraw all" disabled={blocked || !q} onConfirmed={refetch}
         request={{ address: ad("withdrawRouter"), abi: abis.router, functionName: "withdraw", args: [d.id, exit, minOut] }} />
     </div>
   );

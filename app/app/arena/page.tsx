@@ -11,7 +11,8 @@ import { useDecks } from "@/lib/useDecks";
 function MatchRow({ id, m, seedBlock, myDecks, refetch }: { id: bigint; m: any; seedBlock: bigint; myDecks: bigint[]; refetch: () => void }) {
   const { address } = useAccount();
   const { data: block } = useBlockNumber({ watch: true });
-  const [deck, setDeck] = useState<string>(myDecks[0] ? String(myDecks[0]) : "");
+  const [picked, setDeck] = useState<string>("");
+  const deck = picked || (myDecks[0] ? String(myDecks[0]) : "");
   const st = Number(m.status);
   const mine = address && m.playerA?.toLowerCase() === address.toLowerCase();
   const staked = m.stakeA > 0n;
