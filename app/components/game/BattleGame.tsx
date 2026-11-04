@@ -31,7 +31,10 @@ export default function BattleGame(){
   const note=(text:string,kind:Log["kind"]="info")=>setLogs(previous=>[...previous,{text,kind}].slice(-16));
   const burst=(kind:EffectEvent["kind"],target:EffectEvent["target"],amount?:number)=>setEffect({id:Date.now(),kind,target,amount});
   function reset(selected=tier,stage=0){clear();setTier(selected);setRound(stage);change(newBattle(decks[selected].cards,decks[(selected+2+stage)%3].cards));setBusy(false);setAttack(undefined);setBanner("");setPoint(null);setCoin(false);setCue(undefined);setKnockout(undefined);setChoices(false);setSwapping(false);setOpeningStage("versus");setLogs([]);}
-  function begin(stage=round){reset(tier,stage);setPhase("intro");}
+  // Matches take the whole screen; the browser's own fullscreen is a bonus where it is allowed (not on iPhone Safari).
+  function goFullscreen(){try{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.({navigationUI:"hide"}).catch(()=>{});}catch{}}
+  function leaveFullscreen(){try{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});}catch{}}
+  function begin(stage=round){goFullscreen();reset(tier,stage);setPhase("intro");}
   function enter(){setPhase("opening");}
   function startBattle(){setPhase("battle");setBanner("Your turn");sound("turn");note(`${rounds[round]} begins. First to 3 points wins.`);wait(1800,()=>setBanner(""));}
   function finish(winner:"player"|"opponent"){setBusy(false);locked.current=false;setAttack(undefined);setBanner("");setPhase("result");if(winner==="player"){burst("victory","player");sound("rare");}}
@@ -89,7 +92,7 @@ export default function BattleGame(){
     wait(battleTiming.swap,()=>{setSwapping(false);setBusy(false);locked.current=false;});
   }
   const deck=decks[tier],inBattle=phase==="battle";
-  return <div className={`arena-page ${focused?"arena-focused":""}`}>
+  return <div className={`arena-page ${focused?"arena-focused":""} ${phase!=="ready"?"game-fullscreen":""}`}>
     <section className="arena-heading"><div><div className="eyebrow"><span className="live-dot"/>THE ARENA</div><h1>Every card. <span>A new possibility.</span></h1><p>Know your deck. Make your move. Be the last one standing.</p></div><div className="arena-heading-actions"><span className="local-badge">Local practice</span><button className="round-button" aria-label={focused?"Exit focused view":"Focus arena"} onClick={()=>setFocused(!focused)}>{focused?<Minimize2 size={17}/>:<Maximize2 size={17}/>}</button><button className="round-button" aria-label={audio?"Mute sound":"Enable sound"} onClick={()=>{setAudio(!audio);enableSound(!audio);}}>{audio?<Volume2 size={18}/>:<VolumeX size={18}/>}</button></div></section>
     <div className="arena-layout">
       <aside className="deck-sidebar"><div className="sidebar-label"><span>YOUR DECK</span><span>01 / 03</span></div><div className="tier-tabs">{decks.map((d,i)=><button key={d.name} disabled={phase!=="ready"} className={i===tier?"selected":""} onClick={()=>reset(i)}>{d.name}</button>)}</div>
@@ -100,7 +103,7 @@ export default function BattleGame(){
         <div className="tournament-mini"><div className="sidebar-label"><span><Trophy size={13}/>BATTLE ROYALE</span><span>8 PLAYERS</span></div>{rounds.map((r,i)=><div className={`bracket-round ${i===round?"current":""} ${i<round?"complete":""}`} key={r}><span>{i<round?"✓":`0${i+1}`}</span><div><b>{r}</b><small>{i<round?"Qualified":i===round?`You vs ${rivals[i]}`:"Awaiting your victory"}</small></div>{i===round&&<ChevronRight size={15}/>}</div>)}</div>
         <p className="practice-note">Practice bracket with computer opponents. No tokens or yield are staked.</p>
       </aside>
-      <section className="arena-center"><div className="match-toolbar"><span><Swords size={14}/>{rounds[round]}</span><span className="match-status"><i/>{phase==="ready"?"READY TO PLAY":inBattle?busy?"RESOLVING MOVE":"YOUR TURN":phase==="result"?"MATCH COMPLETE":"YOUR LINEUP"}</span><button className="text-button" disabled={phase==="ready"} onClick={()=>setConfirmExit(true)} aria-label="Leave match"><Flag size={14}/></button></div>
+      <section className="arena-center"><div className="match-toolbar"><span><Swords size={14}/>{rounds[round]}</span><span className="match-status"><i/>{phase==="ready"?"READY TO PLAY":inBattle?busy?"RESOLVING MOVE":"YOUR TURN":phase==="result"?"MATCH COMPLETE":"YOUR LINEUP"}</span><button className="text-button" disabled={phase==="ready"} onClick={()=>setConfirmExit(true)} aria-label="Leave match"><Flag size={14}/></button><button className="text-button game-sound" aria-label={audio?"Mute sound":"Enable sound"} onClick={()=>{setAudio(!audio);enableSound(!audio);}}>{audio?<Volume2 size={15}/>:<VolumeX size={15}/>}</button></div>
         <div className="board-surround"><BattleBoard state={state} tier={tier} opponentName={rivals[round]} phase={phase} onInspect={setInspect} onBench={switchCard} onActive={()=>{if(inBattle&&!busy)setChoices(true);else if(!busy)setInspect([state.player.active.id]);}} openingStage={openingStage} knockout={knockout} swapping={swapping} banner={banner} attack={attack} effect={effect}>
           {phase==="ready"&&<div className="ready-card"><div className="ready-icon"><Swords size={22}/></div><span className="eyebrow">THE NEXT CHAPTER IS YOURS</span><h2>Meet your match.</h2><p>Your deck is ready. Are you?</p><button className="primary-button" onClick={()=>begin(0)}>Enter battle<ArrowRight size={17}/></button><small>Preview your cards before every battle</small></div>}
           {phase==="opening"&&<BattleOpening opponent={rivals[round]} onDone={startBattle} onStage={setOpeningStage}/>}
@@ -122,6 +125,6 @@ export default function BattleGame(){
     <div className="mobile-deck-select">{decks.map((d,i)=><button key={d.name} disabled={phase!=="ready"} className={tier===i?"selected":""} onClick={()=>reset(i)}>{d.name}</button>)}</div>
     {phase==="intro"&&<CardTheater key={`${tier}-${round}`} ids={[...deck.cards]} onDone={enter}/>}
     {inspect&&<CardTheater ids={inspect} title="A closer look" inspection onDone={()=>setInspect(null)}/>}
-    {confirmExit&&<div className="modal-backdrop"><section className="confirmation" role="dialog" aria-modal="true" aria-label="Leave practice match"><button className="round-button dismiss" onClick={()=>setConfirmExit(false)} aria-label="Close"><X size={18}/></button><Flag size={28}/><h2>Leave this match?</h2><p>Your practice progress in this bracket will reset.</p><button className="primary-button" onClick={()=>{reset();setPhase("ready");setConfirmExit(false);}}>Return to lobby</button><button className="subtle-button" onClick={()=>setConfirmExit(false)}>Keep playing</button></section></div>}
+    {confirmExit&&<div className="modal-backdrop"><section className="confirmation" role="dialog" aria-modal="true" aria-label="Leave practice match"><button className="round-button dismiss" onClick={()=>setConfirmExit(false)} aria-label="Close"><X size={18}/></button><Flag size={28}/><h2>Leave this match?</h2><p>Your practice progress in this bracket will reset.</p><button className="primary-button" onClick={()=>{reset();setPhase("ready");setConfirmExit(false);leaveFullscreen();}}>Return to lobby</button><button className="subtle-button" onClick={()=>setConfirmExit(false)}>Keep playing</button></section></div>}
   </div>;
 }
