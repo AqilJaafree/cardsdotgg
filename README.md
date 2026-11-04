@@ -37,4 +37,25 @@ pnpm install --ignore-workspace
 pnpm dev   # syncs shared/ into app/lib/shared first
 ```
 
-Needs a browser wallet on Monad Testnet with testnet MON. The app offers a one-click network switch.
+The local practice arena, collection, and pack room work without a wallet. Onchain actions need a browser wallet on Monad Testnet with testnet MON. The app offers a one-click network switch.
+
+## Local animated game
+
+- `/`: three-round practice bracket with computer opponents, a Three.js card showcase before every practice battle, versus introduction, opening coin, animated dealing, attacks, energy attachment, bench switches, knockouts, points, and victory.
+- `/packs`: separate free pack carousel, seal opening, card reveals, and collection storage in this browser. Packs do not affect battles or send transactions.
+- `/collection`: search and inspect all 102 supplied Base Set cards, with collected-card counts.
+- `/arena` and `/match/[id]`: the existing onchain challenge and contract replay flows.
+
+React owns the controls and game state; Three.js renders card and pack scenes; Phaser renders the battle effects through WebGL with a canvas fallback. The layout supports desktop and mobile, with an optional focused portrait arena. Sound is opt-in, and reduced-motion preferences are respected.
+
+The supplied videos guide the visual choreography. This is a reference-inspired implementation, not a pixel-identical recreation or a complete Pokémon TCG rules engine. Practice uses simplified damage, automatic reserve promotion, and first-to-three scoring. Practice state and cards are separate from the onchain YieldDeck engine and its deck NFTs.
+
+```bash
+cd app
+pnpm dev --port 3002
+pnpm test:game
+pnpm typecheck
+pnpm build
+```
+
+Card images are checked into `app/public/cards`. To refresh them from a local reference folder, run `node app/scripts/import-reference-cards.mjs /path/to/base1`. The importer preserves the provided artwork; pack wrappers and the YieldDeck card back are local SVG assets.
