@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useAccount, useReadContract } from "wagmi";
-import { parseUnits } from "viem";
+import { formatUnits, parseUnits } from "viem";
 import { TxButton } from "@/components/TxButton";
 import { Gate } from "@/components/NotDeployed";
 import { abis, ad, fmtGold, fmtUsd, liq } from "@/lib/contracts";
@@ -38,7 +38,13 @@ export default function Pool() {
   const sAmt = parse(swapIn, sDec);
   const quote = useReadContract({ address: pool, abi: abis.pool, functionName: "quoteSwap", args: [swapAsset, sAmt], query: { enabled: sAmt > 0n && rT > 0n } });
   const out = (quote.data as bigint | undefined) ?? 0n;
-  const refetch = () => { rv.refetch(); pos.refetch(); };
+  const allowOf = (token: "tUSD" | "tGOLD") => ({ address: ad(token), abi: abis.token, functionName: "allowance", args: [address!, pool], query: { enabled: !!address, refetchInterval: 4000 } }) as const;
+  const allowT = useReadContract(allowOf("tUSD"));
+  const allowG = useReadContract(allowOf("tGOLD"));
+  const okT = (need: bigint) => ((allowT.data as bigint) ?? 0n) >= need;
+  const okG = (need: bigint) => ((allowG.data as bigint) ?? 0n) >= need;
+  const swapApproved = swapAsset === 0 ? okT(sAmt) : okG(sAmt);
+  const refetch = () => { rv.refetch(); pos.refetch(); allowT.refetch(); allowG.refetch(); };
   const shAmt = parse(shares, 12);
   // expected withdrawal for the share amount, from reserves and total shares via position ratio
   const rmT = pS > 0n ? (pT * shAmt) / pS : 0n, rmG = pS > 0n ? (pG * shAmt) / pS : 0n;
@@ -59,7 +65,7 @@ export default function Pool() {
         <input value={tusd} onChange={(e) => setTusd(e.target.value)} /> tUSD <input value={gold} onChange={(e) => setGold(e.target.value)} /> tGOLD
         <Allowance token="tUSD" spender={pool} need={tIn} onDone={() => {}} />
         <Allowance token="tGOLD" spender={pool} need={gIn} onDone={() => {}} />
-        <TxButton label="Add liquidity" disabled={!address || tIn === 0n || gIn === 0n} onConfirmed={refetch}
+        <TxButton label="Add liquidity" disabled={!address || tIn === 0n || gIn === 0n || !okT(tIn) || !okG(gIn)} onConfirmed={refetch}
           request={{ address: pool, abi: abis.pool, functionName: "addLiquidity", args: [tIn, gIn, slipMin(tIn, slip), slipMin(gIn, slip)] }} />
       </div>
       <div className="card">
@@ -68,12 +74,12 @@ export default function Pool() {
         <input value={swapIn} onChange={(e) => setSwapIn(e.target.value)} />
         <p>Expected out: {swapAsset === 0 ? fmtGold(out) + " tGOLD" : fmtUsd(out) + " tUSD"} · min after slippage {swapAsset === 0 ? fmtGold(slipMin(out, slip)) : fmtUsd(slipMin(out, slip))}</p>
         <Allowance token={swapAsset === 0 ? "tUSD" : "tGOLD"} spender={pool} need={sAmt} onDone={() => {}} />
-        <TxButton label="Swap" disabled={!address || sAmt === 0n || out === 0n} onConfirmed={() => { refetch(); quote.refetch(); }}
+        <TxButton label="Swap" disabled={!address || sAmt === 0n || out === 0n || !swapApproved} onConfirmed={() => { refetch(); quote.refetch(); }}
           request={{ address: pool, abi: abis.pool, functionName: "swap", args: [swapAsset, sAmt, slipMin(out, slip)] }} />
       </div>
       <div className="card">
         <h3>3. Remove liquidity</h3>
-        <input placeholder="LP shares" value={shares} onChange={(e) => setShares(e.target.value)} /> <button className="ghost" onClick={() => setShares(u(pS, 12).replace(/,/g, ""))}>max</button>
+        <input placeholder="LP shares" value={shares} onChange={(e) => setShares(e.target.value)} /> <button className="ghost" onClick={() => setShares(formatUnits(pS, 12))}>max</button>
         <p>≈ {u(rmT, 6)} tUSD + {u(rmG, 18)} tGOLD</p>
         <TxButton label="Remove liquidity" disabled={!address || shAmt === 0n || shAmt > pS} onConfirmed={refetch}
           request={{ address: pool, abi: abis.pool, functionName: "removeLiquidity", args: [shAmt, slipMin(rmT, slip), slipMin(rmG, slip)] }} />
