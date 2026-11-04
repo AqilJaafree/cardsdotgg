@@ -1,4 +1,4 @@
-# YieldDeck
+# Cardsdotgg
 
 Yield-funded card battles on Monad testnet (chain 10143). Deposit testnet tokens, mint a deck NFT with an onchain SVG, and stake accrued yield in 1v1 battles. Principal never moves in a match. Battles are resolved onchain and the app replays the contract's own `simulateWithLog` output.
 
