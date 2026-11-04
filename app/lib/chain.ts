@@ -10,6 +10,9 @@ export const monadTestnet = defineChain({
     default: { http: ["https://testnet-rpc.monad.xyz"] },
   },
   blockExplorers: { default: { name: "MonadExplorer", url: "https://testnet.monadvision.com" } },
+  // Multicall3 lets wagmi bundle many reads into one RPC call; without it every read is its own request and the
+  // public RPC (about 25 calls a second) starts refusing them.
+  contracts: { multicall3: { address: "0xcA11bde05977b3631167028862bE2a173976CA11" } },
   testnet: true,
 });
 

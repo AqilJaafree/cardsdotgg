@@ -46,7 +46,7 @@ export default function Leaderboard() {
           {rows.map((row, i) => (
             <li key={row.p} className={`${row.p === me ? "me" : ""} ${i < 3 ? `top top-${i + 1}` : ""}`}>
               <span className="lb-rank">{i < 3 ? ["🥇", "🥈", "🥉"][i] : i + 1}</span>
-              <span className="lb-who">{row.p === me ? "You" : short(row.p)}<small>{row.w}W · {row.l}L{row.d ? ` · ${row.d}D` : ""}</small></span>
+              <span className="lb-who">{row.p === me ? "You" : row.p === (process.env.NEXT_PUBLIC_PRACTICE_BOT ?? "").toLowerCase() ? "🤖 Practice bot" : short(row.p)}<small>{row.w}W · {row.l}L{row.d ? ` · ${row.d}D` : ""}</small></span>
               <b className="lb-rating">{row.r || "…"}</b>
             </li>
           ))}

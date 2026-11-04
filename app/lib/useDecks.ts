@@ -4,8 +4,15 @@ import { abis, ad } from "./contracts";
 
 export type DeckView = { id: bigint; tier: number; asset: number; principal: bigint; valueUsd: bigint; retired: boolean; available: bigint; locked: bigint; seeded: bigint; uri?: string };
 
+/** Last fully loaded decks per wallet, so a refresh or a brief wallet reconnect never blanks the list. */
+const lastGood = new Map<string, DeckView[]>();
+let lastAddress: string | undefined;
+
 export function useDecks() {
-  const { address } = useAccount();
+  const { address: live } = useAccount();
+  if (live) lastAddress = live;
+  // Privy can drop the address for a moment while a signature window is open; keep using the last one.
+  const address = (live ?? lastAddress) as `0x${string}` | undefined;
   const ids = useReadContract({ address: ad("deckVault"), abi: abis.vault, functionName: "decksOf", args: [address!], query: { enabled: !!address, refetchInterval: 8000 } });
   const list = (ids.data as bigint[] | undefined) ?? [];
   const calls = list.flatMap((id) => [
@@ -24,8 +31,12 @@ export function useDecks() {
   // Hide decks until their data loads, so a retired deck never flashes as active.
   const loaded = decks.filter((_, i) => res.data?.[i * 5]?.result);
   // ready: the deck list for this wallet has been read from the chain, so an empty list really means "no decks".
-  const ready = !!address && ids.isFetched && (list.length === 0 || (res.isFetched && loaded.length === list.length));
-  return { decks: loaded, ready, refetch: () => { ids.refetch(); res.refetch(); } };
+  const fresh = !!address && ids.isFetched && (list.length === 0 || (res.isFetched && loaded.length === list.length));
+  const key = address?.toLowerCase() ?? "";
+  if (fresh) lastGood.set(key, loaded);
+  const cached = lastGood.get(key);
+  const ready = fresh || !!cached;
+  return { decks: fresh ? loaded : cached ?? loaded, ready, refetch: () => { ids.refetch(); res.refetch(); } };
 }
 
 export function svgFromUri(uri?: string): string | undefined {
