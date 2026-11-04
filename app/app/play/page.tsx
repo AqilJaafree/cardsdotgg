@@ -114,7 +114,7 @@ function QuickMatch() {
     </header>
   );
 
-  if (settled && stage === "replay") return <OnchainBattle id={settled.id} m={settled.m} me={me} onDone={() => setStage("result")} />;
+  if (settled && stage === "replay") return <OnchainBattle id={settled.id} m={settled.m} me={me} practice={isBot(settled)} onDone={() => setStage("result")} />;
 
   let body: React.ReactNode;
   if (!address || !ready) {
