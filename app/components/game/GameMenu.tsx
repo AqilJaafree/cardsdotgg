@@ -56,15 +56,15 @@ export function MainMenu({ tier, onTier, onBattle, audio, onAudio }: { tier: num
       </div>
 
       <nav className="cm-buttons">
-        <button className="cm-btn cm-play" onClick={onBattle}>BATTLE</button>
-        <Link className="cm-btn cm-ranked" href="/arena">RANKED</Link>
+        <Link className="cm-btn cm-play" href={`/play?tier=${tier}`}>BATTLE</Link>
+        <button className="cm-btn cm-ranked" onClick={onBattle}>PRACTICE</button>
         <Link className="cm-btn cm-packs" href="/packs">PACKS</Link>
         <Link className="cm-btn cm-collection" href="/collection">COLLECTION</Link>
       </nav>
 
       <div className="cm-icons">
         <Link className="cm-square" href="/decks" aria-label="Vault"><Vault size={24} strokeWidth={2.5} /></Link>
-        <Link className="cm-square" href="/arena" aria-label="Ladder"><Trophy size={24} strokeWidth={2.5} /></Link>
+        <Link className="cm-square" href="/leaderboard" aria-label="Leaderboard"><Trophy size={24} strokeWidth={2.5} /></Link>
         <button className="cm-square" onClick={fullscreen} aria-label="Fullscreen"><Maximize2 size={24} strokeWidth={2.5} /></button>
         <button className="cm-square" onClick={onAudio} aria-label={audio ? "Mute sound" : "Enable sound"}>{audio ? <Volume2 size={24} strokeWidth={2.5} /> : <VolumeX size={24} strokeWidth={2.5} />}</button>
       </div>

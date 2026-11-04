@@ -232,3 +232,32 @@ body:has(.game-menu) .modal-backdrop{z-index:260}
 .wallet-gate-card p{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;color:#6b4423}
 .wallet-gate-btn{width:100%!important;height:58px!important;font-size:24px!important}
 .wallet-gate-btn:disabled{filter:grayscale(.5)}
+
+/* Online quick match and leaderboard: full-screen game screens over the battlefield. */
+.qm-screen{position:fixed;inset:0;z-index:150;overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:16px;padding:calc(14px + env(safe-area-inset-top)) 16px 24px;background:#090a22 url(/arena/night-battle.svg) center/cover no-repeat;font-family:"Lilita One",system-ui,sans-serif;color:#fff}
+.qm-top{width:100%;max-width:520px;display:flex;justify-content:space-between;align-items:center}
+.qm-back{width:auto!important;height:48px!important;padding:0 18px;font-size:20px!important}
+.qm-top .cm-square{font-size:24px}
+.qm-card{width:min(94vw,440px);margin:auto 0;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:24px 18px 26px;border-radius:20px;background:linear-gradient(180deg,#fdf3da,#f2ddb2);border:4px solid #3b1d0e;box-shadow:0 6px 0 #3b1d0e,0 14px 26px #0007;color:#3b1d0e}
+.qm-card h2{margin:0;font-weight:400;font-size:30px;letter-spacing:.02em;font-family:"Lilita One",system-ui,sans-serif}
+.qm-card p,.qm-card small{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;color:#6b4423}
+.qm-vs{font-size:20px!important;color:#3b1d0e!important}
+.qm-btn{width:100%!important}
+.qm-row{display:flex;gap:10px;width:100%}.qm-row .qm-btn{flex:1;font-size:22px}
+.qm-card .tx{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px}
+.qm-card .tx button{width:100%;height:64px;font-family:"Lilita One",system-ui,sans-serif;font-size:28px;letter-spacing:.04em;color:#fff;cursor:pointer;border:4px solid #3b1d0e;border-radius:16px;
+  background:linear-gradient(180deg,#ffe27a 0 48%,#f29a1d 52% 100%);text-shadow:2px 0 0 #3b1d0e,-2px 0 0 #3b1d0e,0 2px 0 #3b1d0e,0 -2px 0 #3b1d0e,0 4px 0 #3b1d0e;box-shadow:0 7px 0 #3b1d0e,inset 0 3px 0 #ffffff70}
+.qm-card .tx button:disabled{filter:grayscale(.55) brightness(.9);cursor:wait}
+.qm-card .tx a{font-family:Inter,system-ui,sans-serif;font-size:12px;color:#7a3d14}
+.qm-card .err{color:#a32424!important;font-size:12px!important}
+.qm-result{font-size:44px!important}.qm-result.win{color:#e8901a;text-shadow:0 3px 0 #3b1d0e}.qm-result.lose{color:#a32424}.qm-result.draw{color:#5a2e12}
+.qm-spinner{width:56px;height:56px;border-radius:50%;border:6px solid #3b1d0e22;border-top-color:#ee8a1e;animation:start-spin 1s linear infinite}
+.qm-foot{margin:0;font-family:Inter,system-ui,sans-serif;font-size:12px;color:#d9c8f0}
+.lb-title{margin:6px 0 0;font-weight:400;font-size:44px;letter-spacing:.04em;color:#ffd24a;text-shadow:3px 0 0 #3b1d0e,-3px 0 0 #3b1d0e,0 3px 0 #3b1d0e,0 -3px 0 #3b1d0e,0 7px 0 #3b1d0e}
+.lb-card{margin:0;align-items:stretch;text-align:left}
+.lb-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.lb-list li{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:#fffaf0;border:3px solid #3b1d0e;box-shadow:0 3px 0 #3b1d0e}
+.lb-list li.me{background:linear-gradient(180deg,#ffe7a8,#f6c766)}
+.lb-rank{width:34px;text-align:center;font-size:22px}
+.lb-who{flex:1;display:flex;flex-direction:column;font-size:18px}.lb-who small{font-family:Inter,system-ui,sans-serif;font-size:12px;color:#6b4423}
+.lb-rating{font-size:24px;font-weight:400;color:#3b1d0e}
