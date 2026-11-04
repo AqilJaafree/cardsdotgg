@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMid slice">
+  <!-- Original painted-style battlefield for matches: a night sky torn by fire, distant mesas and a dark treeline. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#05061a"/>
+      <stop offset=".28" stop-color="#101a52"/>
+      <stop offset=".5" stop-color="#2a3a9c"/>
+      <stop offset=".64" stop-color="#4b2f86"/>
+      <stop offset=".76" stop-color="#7a2f72"/>
+      <stop offset="1" stop-color="#1a0d24"/>
+    </linearGradient>
+    <radialGradient id="flare" cx="62%" cy="22%" r="45%">
+      <stop offset="0" stop-color="#ffb35c" stop-opacity=".55"/>
+      <stop offset=".35" stop-color="#ff5a2e" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#ff5a2e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowLow" cx="50%" cy="78%" r="55%">
+      <stop offset="0" stop-color="#ff6aa8" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#ff6aa8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fire" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff2d1f" stop-opacity="0"/>
+      <stop offset=".25" stop-color="#ff4a1c"/>
+      <stop offset=".55" stop-color="#ff9a2e"/>
+      <stop offset=".8" stop-color="#ffd36b"/>
+      <stop offset="1" stop-color="#fff1b8" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ember" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b51d2c"/>
+      <stop offset="1" stop-color="#ff7a2a"/>
+    </linearGradient>
+    <linearGradient id="mesa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c95a96"/>
+      <stop offset=".35" stop-color="#6b2c6e"/>
+      <stop offset="1" stop-color="#2a1235"/>
+    </linearGradient>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a2c78"/>
+      <stop offset="1" stop-color="#28143c"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="softer" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="34"/></filter>
+    <filter id="spark" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2"/></filter>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#sky)"/>
+  <rect width="1080" height="1920" fill="url(#flare)"/>
+
+  <!-- stars -->
+  <g fill="#fff">
+    <circle cx="90" cy="120" r="2" opacity=".8"/><circle cx="210" cy="60" r="1.4" opacity=".6"/><circle cx="330" cy="170" r="1.8" opacity=".7"/>
+    <circle cx="470" cy="90" r="1.2" opacity=".5"/><circle cx="160" cy="300" r="1.5" opacity=".6"/><circle cx="60" cy="460" r="1.8" opacity=".7"/>
+    <circle cx="980" cy="80" r="1.6" opacity=".7"/><circle cx="1030" cy="260" r="1.3" opacity=".5"/><circle cx="880" cy="40" r="1.1" opacity=".6"/>
+    <circle cx="260" cy="520" r="1.2" opacity=".5"/><circle cx="1000" cy="560" r="1.7" opacity=".6"/><circle cx="420" cy="380" r="1" opacity=".5"/>
+  </g>
+
+  <!-- deep fire clouds, blurred -->
+  <g filter="url(#softer)" opacity=".85">
+    <path d="M-60 520 C 160 420, 380 470, 560 380 S 900 250, 1160 300 L 1160 380 C 920 360, 760 470, 560 500 S 180 600, -60 640 Z" fill="url(#ember)"/>
+    <path d="M-40 860 C 200 780, 420 820, 640 740 S 980 640, 1160 680 L 1160 760 C 960 740, 760 840, 560 870 S 160 960, -40 980 Z" fill="#c2306a" opacity=".7"/>
+  </g>
+
+  <!-- fire streaks across the sky -->
+  <g filter="url(#soft)">
+    <path d="M40 470 C 260 380, 470 420, 650 330 S 940 200, 1100 230" stroke="url(#fire)" stroke-width="46" fill="none" stroke-linecap="round" opacity=".85"/>
+    <path d="M-20 600 C 220 540, 430 560, 640 470 S 960 360, 1120 380" stroke="url(#fire)" stroke-width="26" fill="none" stroke-linecap="round" opacity=".7"/>
+    <path d="M120 250 C 330 210, 520 230, 700 160 S 980 90, 1100 110" stroke="url(#fire)" stroke-width="18" fill="none" stroke-linecap="round" opacity=".55"/>
+    <path d="M200 780 C 420 720, 640 740, 820 680 S 1020 620, 1120 640" stroke="url(#fire)" stroke-width="20" fill="none" stroke-linecap="round" opacity=".45"/>
+  </g>
+  <g>
+    <path d="M60 470 C 270 392, 470 426, 650 338 S 930 214, 1090 238" stroke="#ffe3a0" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>
+    <path d="M10 598 C 230 545, 430 563, 640 478 S 950 372, 1110 388" stroke="#ffd27a" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/>
+  </g>
+
+  <!-- floating sparks -->
+  <g fill="#ffcf7a" filter="url(#spark)">
+    <circle cx="380" cy="420" r="5"/><circle cx="560" cy="300" r="4"/><circle cx="720" cy="260" r="6"/><circle cx="860" cy="330" r="3.5"/>
+    <circle cx="240" cy="520" r="4"/><circle cx="690" cy="430" r="3"/><circle cx="930" cy="200" r="4.5"/><circle cx="470" cy="560" r="3"/>
+    <circle cx="150" cy="650" r="3.5"/><circle cx="800" cy="560" r="4"/><circle cx="1010" cy="420" r="3"/><circle cx="620" cy="640" r="3.5"/>
+  </g>
+  <g fill="#ff7b3a" filter="url(#spark)" opacity=".9">
+    <circle cx="300" cy="360" r="3"/><circle cx="640" cy="380" r="3.5"/><circle cx="780" cy="190" r="3"/><circle cx="520" cy="470" r="2.5"/>
+    <circle cx="980" cy="300" r="3"/><circle cx="420" cy="250" r="2.5"/><circle cx="880" cy="470" r="2.5"/>
+  </g>
+
+  <!-- horizon glow -->
+  <rect y="900" width="1080" height="1020" fill="url(#glowLow)"/>
+
+  <!-- far ridge -->
+  <path d="M0 1240 L 90 1190 L 180 1215 L 290 1150 L 380 1180 L 470 1130 L 560 1170 L 660 1120 L 760 1165 L 860 1140 L 960 1185 L 1080 1150 L 1080 1920 L 0 1920 Z" fill="url(#far)" opacity=".9"/>
+
+  <!-- the mesa, rim-lit by the fire -->
+  <path d="M360 1290 L 420 1180 L 470 1170 L 500 1120 L 640 1110 L 680 1150 L 720 1160 L 780 1290 Z" fill="url(#mesa)"/>
+  <path d="M500 1120 L 640 1110 L 646 1122 L 506 1132 Z" fill="#ffb0d0" opacity=".55"/>
+  <path d="M420 1180 L 470 1170 L 474 1180 L 426 1190 Z" fill="#ff9ec4" opacity=".45"/>
+
+  <!-- mid hills -->
+  <path d="M0 1380 C 140 1320, 260 1350, 380 1300 S 620 1270, 760 1320 S 980 1290, 1080 1330 L 1080 1920 L 0 1920 Z" fill="#331540"/>
+  <path d="M0 1450 C 180 1410, 320 1440, 470 1400 S 760 1380, 900 1420 S 1040 1410, 1080 1420 L 1080 1920 L 0 1920 Z" fill="#241030" opacity=".95"/>
+
+  <!-- treeline silhouettes -->
+  <g fill="#120818">
+    <path d="M0 1560 L 0 1500 L 20 1470 L 34 1500 L 50 1440 L 70 1495 L 92 1455 L 110 1500 L 130 1450 L 150 1510 L 176 1470 L 196 1515 L 220 1465 L 240 1520 L 262 1480 L 290 1530 L 320 1520 L 350 1540 L 380 1530 L 420 1545 L 460 1535 L 500 1550 L 540 1540 L 580 1552 L 620 1540 L 660 1550 L 700 1530 L 730 1540 L 760 1500 L 780 1530 L 800 1470 L 822 1520 L 846 1460 L 868 1515 L 892 1450 L 916 1505 L 940 1440 L 964 1500 L 990 1455 L 1012 1505 L 1040 1460 L 1060 1500 L 1080 1470 L 1080 1920 L 0 1920 Z"/>
+  </g>
+  <path d="M0 1640 C 200 1600, 400 1630, 560 1610 S 880 1590, 1080 1620 L 1080 1920 L 0 1920 Z" fill="#0b0510"/>
+
+  <!-- haze over the ground -->
+  <rect y="1500" width="1080" height="420" fill="#ff5fa0" opacity=".05"/>
+</svg>
