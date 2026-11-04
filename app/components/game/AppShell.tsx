@@ -8,8 +8,20 @@ import {NetworkGuard} from "@/components/NetworkGuard";
 const links=[{href:"/",name:"Arena",icon:Swords},{href:"/collection",name:"Collection",icon:Layers},{href:"/packs",name:"Packs",icon:Package},{href:"/decks",name:"Vault",icon:Vault}];
 export default function AppShell({children}:{children:React.ReactNode}){
   const path=usePathname(),game=path==="/"||path==="/collection"||path==="/packs";
-  const {address,isConnected}=useAccount(),{connect,connectors,isPending,error}=useConnect(),{disconnect}=useDisconnect();
+  const {address,isConnected,status}=useAccount(),{connect,connectors,isPending,error}=useConnect(),{disconnect}=useDisconnect();
   const [walletOpen,setWalletOpen]=useState(false);
+  // Every screen needs a connected wallet: until one is connected, only the connect screen shows.
+  if(!isConnected&&status!=="connecting"&&status!=="reconnecting")return <><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"/>
+    <div className="wallet-gate">
+      <img className="wallet-gate-logo" src="/cardsdotgg-logo.jpg" alt="Cardsdotgg: collect, build, battle" draggable={false}/>
+      <div className="wallet-gate-card">
+        <h2>Connect a wallet to play</h2>
+        <p>Your deck, matches and yield live on Monad testnet, so every player needs a wallet.</p>
+        {connectors.length?connectors.map(c=><button className="cm-btn wallet-gate-btn" key={c.uid} disabled={isPending} onClick={()=>connect({connector:c})}>{isPending?"Check your wallet…":`Connect ${c.name==="Injected"?"wallet":c.name}`}</button>)
+          :<p className="err">No wallet found in this browser. Install MetaMask or Rabby, then reload.</p>}
+        {error&&<p className="err">{error.message.split("\n")[0]}</p>}
+      </div>
+    </div></>;
   return <><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"/><header className="site-header"><Link className="brand-lockup" href="/" aria-label="Cardsdotgg home"><span className="brand-icon"><Layers size={23} strokeWidth={1.7}/></span><b>Cardsdotgg</b></Link><nav className="desktop-nav" aria-label="Main navigation">{links.map(({href,name,icon:Icon})=><Link className={(href==="/decks"?!game:path===href)?"active":""} href={href} key={href}><Icon size={16}/>{name}</Link>)}</nav><div className="header-right"><span className="network-label"><span/>MONAD TESTNET</span><button className="wallet-button" onClick={()=>setWalletOpen(true)}><Wallet size={15}/><span>{isConnected?`${address!.slice(0,5)}…${address!.slice(-4)}`:"Connect wallet"}</span><ChevronDown size={12}/></button></div></header>
     <main className={game?"game-main":"legacy-main"}>{game?children:<><div className="vault-subnav">{[["/deposit","Deposit"],["/decks","My vault"],["/arena","Onchain arena"],["/pool","Pool"],["/withdraw","Withdraw"]].map(([href,label])=><Link key={href} href={href} className={path===href?"active":""}>{label}</Link>)}</div><NetworkGuard>{children}</NetworkGuard></>}</main>
     <footer className="site-footer"><span><span className="footer-mark">◇</span> A little strategy. A little magic.</span><span>Cardsdotgg · Local preview<span className="footer-dot"/>Built on Monad<ArrowUpRight size={11}/></span></footer>
