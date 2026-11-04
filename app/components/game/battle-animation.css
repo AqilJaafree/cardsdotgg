@@ -48,3 +48,31 @@
 .game-fullscreen .game-sound{margin-left:4px}
 .match-toolbar .game-sound{display:none}.game-fullscreen .match-toolbar .game-sound{display:inline-flex}
 @media(min-width:700px){.game-fullscreen .battle-board{border-radius:40px 40px 18px 18px!important;box-shadow:0 20px 60px #52697822!important}.game-fullscreen .match-toolbar,.game-fullscreen .board-caption{max-width:560px!important;margin:0 auto!important}}
+
+/* Battlefield during a match: a painted night sky with drifting embers; the board's fields turn to glass over it. */
+.arena-page.game-fullscreen{background:#090a22 url(/arena/night-battle.svg) center 35%/cover no-repeat}
+.arena-page.game-fullscreen::before,.arena-page.game-fullscreen::after{content:"";position:absolute;inset:-10% 0 0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(2px 2px at 12% 80%,#ffd27a,transparent),radial-gradient(1.6px 1.6px at 28% 92%,#ff8a3d,transparent),radial-gradient(2.4px 2.4px at 47% 85%,#ffe2a0,transparent),radial-gradient(1.4px 1.4px at 63% 96%,#ff7a2a,transparent),radial-gradient(2px 2px at 78% 88%,#ffc46b,transparent),radial-gradient(1.8px 1.8px at 91% 82%,#ff9b47,transparent),radial-gradient(1.5px 1.5px at 36% 70%,#ffd27a,transparent),radial-gradient(2px 2px at 70% 74%,#ff8a3d,transparent);
+  animation:embers-rise 9s linear infinite;opacity:.9}
+.arena-page.game-fullscreen::after{animation-duration:14s;animation-delay:-6s;transform:scale(1.4);opacity:.6;filter:blur(.6px)}
+@keyframes embers-rise{from{transform:translate3d(0,0,0)}to{transform:translate3d(-3%,-60%,0)}}
+@media(prefers-reduced-motion:reduce){.arena-page.game-fullscreen::before,.arena-page.game-fullscreen::after{animation:none}}
+.game-fullscreen .arena-layout{position:relative;z-index:1}
+.game-fullscreen .battle-board{background:transparent!important}
+.game-fullscreen .table-surface{background:transparent}
+.game-fullscreen .red-field{background:linear-gradient(160deg,#ff5a3c33,#b0204a22 60%,#ff8a4a1a);border-color:#ffd9b04d;outline-color:#ff9a6a22;backdrop-filter:blur(1.5px) saturate(1.1)}
+.game-fullscreen .blue-field{background:linear-gradient(200deg,#4c7dff2e,#2a2f9a26 55%,#6fd0ff1f);border-color:#bfd8ff40;backdrop-filter:blur(1.5px) saturate(1.1)}
+.game-fullscreen .table-line{background:linear-gradient(90deg,transparent,#ffe7c2aa,transparent);height:.6%;top:49.7%;box-shadow:0 0 18px #ffb36b}
+.game-fullscreen .table-emblem{border-color:#ffffff2e;box-shadow:0 0 40px #ff9a4a33 inset,0 0 30px #7aa8ff22}
+.game-fullscreen .field-orbit{border-color:#ffffff22}
+.game-fullscreen .bench-slot{border-color:#ffffff38;background:#ffffff08}
+.game-fullscreen .player-strip b{color:#fff1df}
+.game-fullscreen .player-strip small,.game-fullscreen .turn-marker{color:#d9c8f0}
+.game-fullscreen .match-toolbar,.game-fullscreen .match-toolbar span,.game-fullscreen .match-toolbar .text-button{color:#f3eaff}
+.game-fullscreen .match-status{color:#ffcf8a}.game-fullscreen .match-status>i{background:#ffb35c;box-shadow:0 0 8px #ffb35c}
+.game-fullscreen .board-caption,.game-fullscreen .board-caption .text-button{color:#cbbbe6}
+.game-fullscreen .energy-zone small{color:#e6dcff}
+.game-fullscreen .table-emblem>i,.game-fullscreen .table-emblem i{background:radial-gradient(circle,#ffb36b22,#ffffff08 60%,transparent 70%)!important;border-color:#ffffff26!important;box-shadow:none!important}
+.game-fullscreen .table-emblem{background:transparent!important;border-width:3px}
+.game-fullscreen .red-field{border-width:3px;outline:2px solid #ffffff1f}
+.game-fullscreen .blue-field{border-width:3px}
