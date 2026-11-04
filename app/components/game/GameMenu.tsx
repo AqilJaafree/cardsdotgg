@@ -38,7 +38,7 @@ export function MainMenu({ tier, onTier, onBattle, audio, onAudio }: { tier: num
   return (
     <div className="cm-menu">
       <link rel="stylesheet" href={FONT} />
-      <Logo />
+      <img className="cm-logo-img" src="/cardsdotgg-logo.jpg" alt={`${BRAND}: collect, build, battle`} draggable={false} />
 
       <div className="cm-deck">
         <div className="cm-fan">
