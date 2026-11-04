@@ -8,3 +8,28 @@
 @media(max-width:680px) and (min-height:750px){.arena-page .battle-board{max-width:min(350px,calc((100svh - 300px)*.583333))}.arena-page .arena-heading{padding-top:15px;padding-bottom:13px}.arena-page .mobile-deck-select{padding-top:10px}.arena-page+.site-footer{display:none}}
 @media(max-width:380px){.game-main{padding:0 9px}.arena-heading h1{font-size:18px}.arena-heading h1>span{font-size:15px}.arena-heading .local-badge{display:none}.collection-stats{gap:17px;padding:15px}.collection-grid{gap:17px 8px}.collection-card b{font-size:8px}.pack-title h1{font-size:26px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.turn-banner{animation:none!important;transform:rotate(-5deg)}.theater-aurora{animation:none!important}}
+
+/* Holo cards. On a Base Set card the art box spans x 10.3%–90% and y 11.5%–51.5%; mask-position percentages are of the leftover space, hence 50.7% / 19.2%. */
+.holo-card { --mx: 50%; --my: 50%; --rx: 0deg; --ry: 0deg; --hyp: 0; --foil-opacity: .55; position: relative; display: block; border-radius: 4.8% / 3.4%; transform: perspective(700px) rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .25s ease-out; transform-style: preserve-3d; overflow: hidden; isolation: isolate; }
+.holo-card:hover { transition: transform .06s linear; }
+.holo-card img { display: block; width: 100%; height: auto; }
+.holo-foil, .holo-glare { position: absolute; inset: 0; pointer-events: none; border-radius: inherit; }
+.holo-foil {
+  opacity: calc(var(--foil-opacity) * .9);
+  mix-blend-mode: color-dodge;
+  background:
+    repeating-linear-gradient(115deg, hsl(2 90% 62% / .9) 0%, hsl(52 95% 60% / .9) 4%, hsl(140 85% 58% / .9) 8%, hsl(195 95% 62% / .9) 12%, hsl(265 90% 70% / .9) 16%, hsl(320 90% 65% / .9) 20%, hsl(2 90% 62% / .9) 24%),
+    repeating-linear-gradient(35deg, #0e152e 0%, hsl(180 10% 60%) 3.8%, hsl(180 29% 66%) 4.5%, hsl(180 10% 60%) 5.2%, #0e152e 10%, #0e152e 12%);
+  background-size: 300% 300%, 250% 250%;
+  background-position: var(--mx) var(--my), calc(100% - var(--mx)) calc(100% - var(--my));
+  background-blend-mode: exclusion;
+  filter: brightness(.75) contrast(1.6) saturate(1.3);
+  transition: opacity .3s;
+}
+.holo-glare { opacity: var(--foil-opacity); mix-blend-mode: overlay; background: radial-gradient(farthest-corner circle at var(--mx) var(--my), rgba(255,255,255,.75) 6%, rgba(255,255,255,.25) 28%, rgba(0,0,0,.35) 90%); }
+/* Holofoil rare: foil only inside the art window. */
+.holo-rare .holo-foil { -webkit-mask: linear-gradient(#000 0 0) 50.7% 19.2% / 79.7% 40% no-repeat; mask: linear-gradient(#000 0 0) 50.7% 19.2% / 79.7% 40% no-repeat; }
+.holo-rare { box-shadow: 0 0 calc(10px + 18px * var(--hyp)) rgba(255, 210, 120, .35); }
+/* Reverse holo: foil everywhere except the art window, a little softer. */
+.holo-reverse .holo-foil { opacity: calc(var(--foil-opacity) * .55); -webkit-mask: linear-gradient(#000 0 0), linear-gradient(#000 0 0) 50.7% 19.2% / 79.7% 40% no-repeat; -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) exclude, linear-gradient(#000 0 0) 50.7% 19.2% / 79.7% 40% no-repeat; }
+@media (prefers-reduced-motion: reduce) { .holo-card { transform: none !important; } }

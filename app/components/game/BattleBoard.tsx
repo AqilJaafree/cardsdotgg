@@ -2,6 +2,7 @@
 import { Leaf, Flame, Zap, Hexagon } from "lucide-react";
 import dynamic from "next/dynamic";
 import { cardById } from "@/lib/game/catalog";
+import HoloCard from "./HoloCard";
 import type { BattleState, Fighter } from "@/lib/game/simulation";
 import type { EffectEvent } from "./BattleEffects";
 const BattleEffects=dynamic(()=>import("./BattleEffects"),{ssr:false});
@@ -9,7 +10,7 @@ export function Energy({tier=0}:{tier?:number}){const Icon=tier===0?Leaf:tier===
 function CombatCard({unit,onClick,active=false,side,tier,attacking}:{unit:Fighter;onClick:()=>void;active?:boolean;side:string;tier:number;attacking?:boolean}){
   const card=cardById(unit.id);
   return <button className={`combat-card ${active?"combat-active":""} ${attacking?"lunging":""} ${side}`} onClick={onClick} aria-label={`${card.name}, ${unit.hp} HP. ${active?"Inspect":"Switch or inspect"}`}>
-    <img src={card.src} alt={card.name} draggable={false}/>
+    <HoloCard rarity={card.rarity}><img src={card.src} alt={card.name} draggable={false}/></HoloCard>
     {active&&<><span className="hp-badge"><small>HP</small>{unit.hp}</span><span className="hp-track"><i style={{width:`${Math.max(0,unit.hp/unit.maxHp)*100}%`,background:unit.hp/unit.maxHp<.3?"#eb795d":undefined}}/></span><span className="attached-energy">{Array.from({length:unit.energy},(_,i)=><Energy key={i} tier={tier}/>)}</span></>}
     {!active&&<span className="bench-hp">{unit.hp}</span>}
   </button>;
