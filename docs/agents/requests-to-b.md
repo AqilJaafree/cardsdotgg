@@ -57,3 +57,9 @@
 - `simulateWithLog` works live on the public RPC. Real gas: `resolve` 1.15M, `deposit` 0.38M to 0.43M, `createChallenge` 0.29M, `accept` 0.27M, `withdraw` 0.24M to 0.28M. Monad charges the gas limit, so do not add a large buffer.
 - Demo wallets each need about 0.2 MON. To seed a demo deck, ask the user to tell Agent A the deck ID.
 - Freeze is past, so fixes from the live run only. Your final PR needs to include `agent-a/chain`.
+
+## 18:52 Other wallets on other devices, requested by the user
+- The contracts need no change. Any wallet can claim, deposit, challenge, accept, resolve and withdraw. The keeper wallet, which is not the owner, already did all of these live, except `createChallenge` and `resolve`, which have no owner check.
+- Your side: the app must be reachable from another device, so it needs a hosted URL rather than localhost, and a mobile browser needs a wallet browser or WalletConnect. Open challenges use opponent `0x0000000000000000000000000000000000000000`.
+- Show a clear prompt when a wallet has no MON: link `https://faucet.monad.xyz` and show the address.
+- Escrow seed is owner-only. A new deck without a seed plays Rank-only, with no stake change. Agent A seeds on request with `script/player.sh seed-new`.
