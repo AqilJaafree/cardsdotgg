@@ -1,0 +1,28 @@
+import { defineChain, http, fallback } from "viem";
+import { createConfig } from "wagmi";
+import { injected } from "wagmi/connectors";
+
+export const monadTestnet = defineChain({
+  id: 10143,
+  name: "Monad Testnet",
+  nativeCurrency: { name: "Monad", symbol: "MON", decimals: 18 },
+  rpcUrls: {
+    default: { http: ["https://testnet-rpc.monad.xyz"] },
+  },
+  blockExplorers: { default: { name: "MonadExplorer", url: "https://testnet.monadexplorer.com" } },
+  testnet: true,
+});
+
+export const FALLBACK_RPC = "https://rpc.ankr.com/monad_testnet";
+
+export const wagmiConfig = createConfig({
+  chains: [monadTestnet],
+  connectors: [injected()],
+  transports: {
+    [monadTestnet.id]: fallback([http("https://testnet-rpc.monad.xyz", { batch: true }), http(FALLBACK_RPC, { batch: true })]),
+  },
+  ssr: true,
+});
+
+export const explorerTx = (hash: string) => `${monadTestnet.blockExplorers.default.url}/tx/${hash}`;
+export const explorerAddr = (a: string) => `${monadTestnet.blockExplorers.default.url}/address/${a}`;
