@@ -1,0 +1,716 @@
+[
+  {
+    "id": 1,
+    "name": "Alakazam",
+    "src": "/cards/001-Alakazam.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 2,
+    "name": "Blastoise",
+    "src": "/cards/002-Blastoise.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 3,
+    "name": "Chansey",
+    "src": "/cards/003-Chansey.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 4,
+    "name": "Charizard",
+    "src": "/cards/004-Charizard.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 5,
+    "name": "Clefairy",
+    "src": "/cards/005-Clefairy.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 6,
+    "name": "Gyarados",
+    "src": "/cards/006-Gyarados.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 7,
+    "name": "Hitmonchan",
+    "src": "/cards/007-Hitmonchan.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 8,
+    "name": "Machamp",
+    "src": "/cards/008-Machamp.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 9,
+    "name": "Magneton",
+    "src": "/cards/009-Magneton.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 10,
+    "name": "Mewtwo",
+    "src": "/cards/010-Mewtwo.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 11,
+    "name": "Nidoking",
+    "src": "/cards/011-Nidoking.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 12,
+    "name": "Ninetales",
+    "src": "/cards/012-Ninetales.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 13,
+    "name": "Poliwrath",
+    "src": "/cards/013-Poliwrath.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 14,
+    "name": "Raichu",
+    "src": "/cards/014-Raichu.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 15,
+    "name": "Venusaur",
+    "src": "/cards/015-Venusaur.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 16,
+    "name": "Zapdos",
+    "src": "/cards/016-Zapdos.webp",
+    "rarity": "Holo Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 17,
+    "name": "Beedrill",
+    "src": "/cards/017-Beedrill.webp",
+    "rarity": "Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 18,
+    "name": "Dragonair",
+    "src": "/cards/018-Dragonair.webp",
+    "rarity": "Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 19,
+    "name": "Dugtrio",
+    "src": "/cards/019-Dugtrio.webp",
+    "rarity": "Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 20,
+    "name": "Electabuzz",
+    "src": "/cards/020-Electabuzz.webp",
+    "rarity": "Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 21,
+    "name": "Electrode",
+    "src": "/cards/021-Electrode.webp",
+    "rarity": "Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 22,
+    "name": "Pidgeotto",
+    "src": "/cards/022-Pidgeotto.webp",
+    "rarity": "Rare",
+    "category": "Pokemon"
+  },
+  {
+    "id": 23,
+    "name": "Arcanine",
+    "src": "/cards/023-Arcanine.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 24,
+    "name": "Charmeleon",
+    "src": "/cards/024-Charmeleon.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 25,
+    "name": "Dewgong",
+    "src": "/cards/025-Dewgong.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 26,
+    "name": "Dratini",
+    "src": "/cards/026-Dratini.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 27,
+    "name": "Farfetch'd",
+    "src": "/cards/027-Farfetch_d.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 28,
+    "name": "Growlithe",
+    "src": "/cards/028-Growlithe.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 29,
+    "name": "Haunter",
+    "src": "/cards/029-Haunter.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 30,
+    "name": "Ivysaur",
+    "src": "/cards/030-Ivysaur.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 31,
+    "name": "Jynx",
+    "src": "/cards/031-Jynx.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 32,
+    "name": "Kadabra",
+    "src": "/cards/032-Kadabra.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 33,
+    "name": "Kakuna",
+    "src": "/cards/033-Kakuna.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 34,
+    "name": "Machoke",
+    "src": "/cards/034-Machoke.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 35,
+    "name": "Magikarp",
+    "src": "/cards/035-Magikarp.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 36,
+    "name": "Magmar",
+    "src": "/cards/036-Magmar.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 37,
+    "name": "Nidorino",
+    "src": "/cards/037-Nidorino.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 38,
+    "name": "Poliwhirl",
+    "src": "/cards/038-Poliwhirl.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 39,
+    "name": "Porygon",
+    "src": "/cards/039-Porygon.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 40,
+    "name": "Raticate",
+    "src": "/cards/040-Raticate.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 41,
+    "name": "Seel",
+    "src": "/cards/041-Seel.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 42,
+    "name": "Wartortle",
+    "src": "/cards/042-Wartortle.webp",
+    "rarity": "Uncommon",
+    "category": "Pokemon"
+  },
+  {
+    "id": 43,
+    "name": "Abra",
+    "src": "/cards/043-Abra.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 44,
+    "name": "Bulbasaur",
+    "src": "/cards/044-Bulbasaur.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 45,
+    "name": "Caterpie",
+    "src": "/cards/045-Caterpie.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 46,
+    "name": "Charmander",
+    "src": "/cards/046-Charmander.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 47,
+    "name": "Diglett",
+    "src": "/cards/047-Diglett.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 48,
+    "name": "Doduo",
+    "src": "/cards/048-Doduo.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 49,
+    "name": "Drowzee",
+    "src": "/cards/049-Drowzee.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 50,
+    "name": "Gastly",
+    "src": "/cards/050-Gastly.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 51,
+    "name": "Koffing",
+    "src": "/cards/051-Koffing.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 52,
+    "name": "Machop",
+    "src": "/cards/052-Machop.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 53,
+    "name": "Magnemite",
+    "src": "/cards/053-Magnemite.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 54,
+    "name": "Metapod",
+    "src": "/cards/054-Metapod.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 55,
+    "name": "Nidoran♂",
+    "src": "/cards/055-Nidoran.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 56,
+    "name": "Onix",
+    "src": "/cards/056-Onix.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 57,
+    "name": "Pidgey",
+    "src": "/cards/057-Pidgey.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 58,
+    "name": "Pikachu",
+    "src": "/cards/058-Pikachu.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 59,
+    "name": "Poliwag",
+    "src": "/cards/059-Poliwag.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 60,
+    "name": "Ponyta",
+    "src": "/cards/060-Ponyta.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 61,
+    "name": "Rattata",
+    "src": "/cards/061-Rattata.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 62,
+    "name": "Sandshrew",
+    "src": "/cards/062-Sandshrew.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 63,
+    "name": "Squirtle",
+    "src": "/cards/063-Squirtle.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 64,
+    "name": "Starmie",
+    "src": "/cards/064-Starmie.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 65,
+    "name": "Staryu",
+    "src": "/cards/065-Staryu.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 66,
+    "name": "Tangela",
+    "src": "/cards/066-Tangela.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 67,
+    "name": "Voltorb",
+    "src": "/cards/067-Voltorb.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 68,
+    "name": "Vulpix",
+    "src": "/cards/068-Vulpix.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 69,
+    "name": "Weedle",
+    "src": "/cards/069-Weedle.webp",
+    "rarity": "Common",
+    "category": "Pokemon"
+  },
+  {
+    "id": 70,
+    "name": "Clefairy Doll",
+    "src": "/cards/070-Clefairy_Doll.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 71,
+    "name": "Computer Search",
+    "src": "/cards/071-Computer_Search.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 72,
+    "name": "Devolution Spray",
+    "src": "/cards/072-Devolution_Spray.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 73,
+    "name": "Impostor Professor Oak",
+    "src": "/cards/073-Impostor_Professor_Oak.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 74,
+    "name": "Item Finder",
+    "src": "/cards/074-Item_Finder.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 75,
+    "name": "Lass",
+    "src": "/cards/075-Lass.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 76,
+    "name": "Pokémon Breeder",
+    "src": "/cards/076-Pok_mon_Breeder.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 77,
+    "name": "Pokémon Trader",
+    "src": "/cards/077-Pok_mon_Trader.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 78,
+    "name": "Scoop Up",
+    "src": "/cards/078-Scoop_Up.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 79,
+    "name": "Super Energy Removal",
+    "src": "/cards/079-Super_Energy_Removal.webp",
+    "rarity": "Rare",
+    "category": "Trainer"
+  },
+  {
+    "id": 80,
+    "name": "Defender",
+    "src": "/cards/080-Defender.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 81,
+    "name": "Energy Retrieval",
+    "src": "/cards/081-Energy_Retrieval.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 82,
+    "name": "Full Heal",
+    "src": "/cards/082-Full_Heal.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 83,
+    "name": "Maintenance",
+    "src": "/cards/083-Maintenance.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 84,
+    "name": "PlusPower",
+    "src": "/cards/084-PlusPower.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 85,
+    "name": "Pokémon Center",
+    "src": "/cards/085-Pok_mon_Center.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 86,
+    "name": "Pokémon Flute",
+    "src": "/cards/086-Pok_mon_Flute.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 87,
+    "name": "Pokédex",
+    "src": "/cards/087-Pok_dex.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 88,
+    "name": "Professor Oak",
+    "src": "/cards/088-Professor_Oak.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 89,
+    "name": "Revive",
+    "src": "/cards/089-Revive.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 90,
+    "name": "Super Potion",
+    "src": "/cards/090-Super_Potion.webp",
+    "rarity": "Uncommon",
+    "category": "Trainer"
+  },
+  {
+    "id": 91,
+    "name": "Bill",
+    "src": "/cards/091-Bill.webp",
+    "rarity": "Common",
+    "category": "Trainer"
+  },
+  {
+    "id": 92,
+    "name": "Energy Removal",
+    "src": "/cards/092-Energy_Removal.webp",
+    "rarity": "Common",
+    "category": "Trainer"
+  },
+  {
+    "id": 93,
+    "name": "Gust of Wind",
+    "src": "/cards/093-Gust_of_Wind.webp",
+    "rarity": "Common",
+    "category": "Trainer"
+  },
+  {
+    "id": 94,
+    "name": "Potion",
+    "src": "/cards/094-Potion.webp",
+    "rarity": "Common",
+    "category": "Trainer"
+  },
+  {
+    "id": 95,
+    "name": "Switch",
+    "src": "/cards/095-Switch.webp",
+    "rarity": "Common",
+    "category": "Trainer"
+  },
+  {
+    "id": 96,
+    "name": "Double Colorless Energy",
+    "src": "/cards/096-Double_Colorless_Energy.webp",
+    "rarity": "Uncommon",
+    "category": "Energy"
+  },
+  {
+    "id": 97,
+    "name": "Fighting Energy",
+    "src": "/cards/097-Fighting_Energy.webp",
+    "rarity": "Common",
+    "category": "Energy"
+  },
+  {
+    "id": 98,
+    "name": "Fire Energy",
+    "src": "/cards/098-Fire_Energy.webp",
+    "rarity": "Common",
+    "category": "Energy"
+  },
+  {
+    "id": 99,
+    "name": "Grass Energy",
+    "src": "/cards/099-Grass_Energy.webp",
+    "rarity": "Common",
+    "category": "Energy"
+  },
+  {
+    "id": 100,
+    "name": "Lightning Energy",
+    "src": "/cards/100-Lightning_Energy.webp",
+    "rarity": "Common",
+    "category": "Energy"
+  },
+  {
+    "id": 101,
+    "name": "Psychic Energy",
+    "src": "/cards/101-Psychic_Energy.webp",
+    "rarity": "Common",
+    "category": "Energy"
+  },
+  {
+    "id": 102,
+    "name": "Water Energy",
+    "src": "/cards/102-Water_Energy.webp",
+    "rarity": "Common",
+    "category": "Energy"
+  }
+]
