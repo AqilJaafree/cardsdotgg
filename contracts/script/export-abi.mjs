@@ -5,7 +5,7 @@ mkdirSync(new URL("shared/abi/", root), { recursive: true });
 const paths = {
   BattleEngine: "engine/BattleEngine.sol", TestToken: "TestToken.sol", RateOracle: "RateOracle.sol",
   DeckVault: "DeckVault.sol", DeckNFT: "DeckNFT.sol", YieldEscrow: "YieldEscrow.sol", Arena: "Arena.sol",
-  WithdrawRouter: "WithdrawRouter.sol",
+  WithdrawRouter: "WithdrawRouter.sol", LiquidityPool: "LiquidityPool.sol",
 };
 for (const name of Object.keys(paths)) {
   const file = paths[name].split("/").pop();

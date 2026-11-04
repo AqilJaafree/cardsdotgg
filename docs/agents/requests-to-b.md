@@ -27,3 +27,10 @@
 
 ## 17:48 Live RPC check
 - `simulateWithLog` works through `eth_call` on all three public testnet RPCs, tested with a code override: `testnet-rpc.monad.xyz`, `rpc.ankr.com/monad_testnet` and `rpc-testnet.monadinfra.com`. The full loop passed on local anvil. Live deploy is waiting on the funded key.
+
+## 17:57 New feature, requested by the user: liquidity pool
+- `LiquidityPool` is a tUSD/tGOLD constant-product pool. ABI: `shared/abi/LiquidityPool.json`, interface: `shared/interfaces/ILiquidityPool.sol`, address key: `liquidityPool` at deploy. The pool contract is also the LP share ERC-20, with 12 decimals.
+- **Request:** please add one page, with one clean path: approve both tokens to the pool, `addLiquidity`, `swap`, `removeLiquidity`. Show `reserves()` and `positionOf(address)`. Set the min arguments from `quoteSwap` and `reserves` with a slippage setting. Reverts: `pool: slippage`, `pool: zero shares`, `pool: zero in`, `pool: zero out`, `pool: too small`.
+- Fees stay in the reserves, so there is nothing to claim. Do not show a fee APR, since the contract does not track one. `positionOf` values also move with the pool price.
+- Label it honestly: testnet tokens, fees come only from swaps on this pool, and the opening price is the deployer-set demo gold price, not a market price.
+- The rest of your scope is unchanged. Deploy needs about 17.4M gas.

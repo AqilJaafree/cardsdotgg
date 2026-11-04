@@ -8,3 +8,7 @@ Changes from plan section 4:
 - `IRateOracle` adds `cumulativeOf`, which vaults use to accrue across rate changes without iterating decks.
 - `IDeckVault` adds `MIN_DEPOSIT_USD` and `MAX_DECKS`. `IYieldEscrow` adds `reserve`.
 - New `ITestToken` and `IDeckNFT`.
+
+Added at the user's request, after the first interface push:
+
+- New `LiquidityPool` and `ILiquidityPool`: a tUSD/tGOLD constant-product pool with a 0.3% swap fee that stays in the reserves. `addresses.json` gains `liquidityPool`.

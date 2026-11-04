@@ -9,6 +9,7 @@ import {DeckNFT} from "../src/DeckNFT.sol";
 import {YieldEscrow} from "../src/YieldEscrow.sol";
 import {Arena} from "../src/Arena.sol";
 import {WithdrawRouter} from "../src/WithdrawRouter.sol";
+import {LiquidityPool} from "../src/LiquidityPool.sol";
 import {BattleEngine} from "../src/engine/BattleEngine.sol";
 
 /// Keys come only from the environment. Writes shared/addresses.json.
@@ -16,6 +17,7 @@ contract Deploy is Script {
     uint256 constant RESERVE = 1_000_000e6;
     uint256 constant ROUTER_TUSD = 1_000_000e6;
     uint256 constant ROUTER_GOLD = 1_000 ether;
+    uint256 constant POOL_GOLD = 10 ether;
 
     BattleEngine engine;
     TestToken tusd;
@@ -26,6 +28,7 @@ contract Deploy is Script {
     YieldEscrow escrow;
     Arena arena;
     WithdrawRouter router;
+    LiquidityPool pool;
 
     function run() external {
         uint256 key = vm.envUint("DEPLOYER_PRIVATE_KEY");
@@ -55,6 +58,14 @@ contract Deploy is Script {
         escrow.fundReserve(RESERVE);
         tusd.mint(address(router), ROUTER_TUSD);
         tgold.mint(address(router), ROUTER_GOLD);
+        // Opening pool price is the deployer-set gold price, which is not a live price.
+        pool = new LiquidityPool(tusd, tgold);
+        uint256 poolUsd = (POOL_GOLD * gold) / 1e18;
+        tusd.mint(deployer, poolUsd);
+        tgold.mint(deployer, POOL_GOLD);
+        tusd.approve(address(pool), poolUsd);
+        tgold.approve(address(pool), POOL_GOLD);
+        pool.addLiquidity(poolUsd, POOL_GOLD, poolUsd, POOL_GOLD);
         vm.stopBroadcast();
         _write(deployer, keeper);
     }
@@ -73,6 +84,7 @@ contract Deploy is Script {
         vm.serializeAddress(o, "yieldEscrow", address(escrow));
         vm.serializeAddress(o, "arena", address(arena));
         vm.serializeAddress(o, "withdrawRouter", address(router));
+        vm.serializeAddress(o, "liquidityPool", address(pool));
         vm.serializeAddress(o, "multicall3", 0xcA11bde05977b3631167028862bE2a173976CA11);
         vm.serializeString(o, "rpc", "https://testnet-rpc.monad.xyz");
         vm.serializeString(o, "rpcFallback", "https://rpc.ankr.com/monad_testnet");
