@@ -41,3 +41,19 @@
 - It is a one-time read per keeper run, not a live stream, so always show `readAt`.
 - Pool page: show the mainnet data as a clearly separate "Mainnet reference" panel. `reserves()` and `positionOf()` are the testnet pool and test tokens. Never present mainnet reserves or volume as this pool's own, and do not derive an APR from them.
 - Still label it: testnet tokens, thin mainnet pool, fees here come only from swaps on this pool. The testnet pool's price moves with its own swaps and does not follow mainnet.
+
+## 18:32 Deck rates now come from the owner's real Uniswap positions. Replaces the 17:46 rate notes
+- `shared/rate-sources.json` entries now describe one position per tier. Guardian: EURW/USDC V3 #49582. Balanced: USDC/WETH V4 #645141. Degen: WMON/USDC V3 #49584. New fields include `label, version, positionId, positionUrl, owner, inRange, positionValueUsd, windowDays, samplesInRange, samples, feePips, rawBps`.
+- Show each deck's position link and "source: Monad mainnet". Show `inRange` plainly: when it is false, say "out of range, not earning fees right now". WMON and WETH were both out of range at the last read.
+- The rate is what the position's price range was estimated to earn over the last 7 days. Do not say the position itself earned it. Show the `note` text. Balanced no longer has a credit or gold source, so remove that wording.
+- Still read the current rate from `RateOracle.rateOf`.
+
+## 18:43 DEPLOYED on chain 10143
+- `shared/addresses.json` is live and the ABIs are final. Run `git pull origin agent-a/chain`. Keeper and live-loop results follow.
+
+## 18:47 Live results on chain 10143
+- Keeper ran live: rates 0, 1189 and 2260 bps, gold 4036.91 USD. All three positions were out of range at that read, and Guardian's rate is really 0%, so show it that way.
+- The game loop and the LP loop both passed live. Match 1 is a real resolved match (Guardian deck 1 vs Degen deck 2, winner side A), so use `/match/1` to test the replay now. Both decks are retired.
+- `simulateWithLog` works live on the public RPC. Real gas: `resolve` 1.15M, `deposit` 0.38M to 0.43M, `createChallenge` 0.29M, `accept` 0.27M, `withdraw` 0.24M to 0.28M. Monad charges the gas limit, so do not add a large buffer.
+- Demo wallets each need about 0.2 MON. To seed a demo deck, ask the user to tell Agent A the deck ID.
+- Freeze is past, so fixes from the live run only. Your final PR needs to include `agent-a/chain`.
