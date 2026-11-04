@@ -18,3 +18,9 @@
 - Claim: `TestToken.claim()`. Approve `deckVault` before `deposit`.
 - Escrow UI reads: `YieldEscrow.available(id)`, `locked(id)`, `seededTotal(id)`.
 - Revert reasons you can show: `claim: wait 24h`, `below minimum`, `max decks`, `not opponent`, `own challenge`, `stake active`, `seed pending`, `stake locked`, `slippage`.
+
+## 17:46 Rates
+- `shared/rate-sources.json` is an array, one entry per tier: `tier, bps, live, source, sourceContract, sourceUrl, note, readAt, mainnetBlock`. All three tiers are `live: true`. Show "source: Monad mainnet", the source contract and `note`. Read the current rate from `RateOracle.rateOf`, not the JSON.
+- Balanced is credit-only, because no gold strategy was found on Monad, and the spec says the app must say so. It is in `note`.
+- **The gold price is NOT live.** `RateOracle.goldPrice` is deployer-set, because no gold feed was verified. Label it "demo gold price, not live" wherever tGOLD is converted.
+- `resolve` costs about 1M to 1.3M gas, and `resolve` gas depends on the seed.
