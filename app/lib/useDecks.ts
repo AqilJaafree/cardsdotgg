@@ -23,7 +23,9 @@ export function useDecks() {
   });
   // Hide decks until their data loads, so a retired deck never flashes as active.
   const loaded = decks.filter((_, i) => res.data?.[i * 5]?.result);
-  return { decks: loaded, refetch: () => { ids.refetch(); res.refetch(); } };
+  // ready: the deck list for this wallet has been read from the chain, so an empty list really means "no decks".
+  const ready = !!address && ids.isFetched && (list.length === 0 || (res.isFetched && loaded.length === list.length));
+  return { decks: loaded, ready, refetch: () => { ids.refetch(); res.refetch(); } };
 }
 
 export function svgFromUri(uri?: string): string | undefined {

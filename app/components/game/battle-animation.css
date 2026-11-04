@@ -277,3 +277,50 @@ body:has(.game-menu) .modal-backdrop{z-index:260}
 .card button.ghost,.card .ghost{background:#fffaf0!important;color:#3b1d0e!important;border:3px solid #3b1d0e!important;border-radius:12px!important;box-shadow:0 3px 0 #3b1d0e!important;font-family:Inter,system-ui,sans-serif!important;text-shadow:none!important}
 .card select{min-width:120px;padding:8px 10px}
 .card label{color:#3b1d0e}
+
+/* Online battle: searching radar, VS slam, starter pack, and the onchain battle replay. */
+.ob-search{position:relative;width:220px;height:170px;margin:0 auto}
+.ob-radar{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;border:3px solid #3b1d0e33;background:conic-gradient(from 0deg,#ee8a1e66,transparent 30%);animation:start-spin 1.6s linear infinite}
+.ob-ring{position:absolute;inset:0;animation:ob-orbit 6s linear infinite;transform-style:preserve-3d}
+.ob-ring img{position:absolute;left:50%;top:50%;width:54px;margin:-38px 0 0 -27px;border-radius:5px;box-shadow:0 6px 12px #0006;transform:rotate(calc(var(--i)*60deg)) translateY(-70px) rotate(calc(var(--i)*-60deg))}
+@keyframes ob-orbit{to{transform:rotate(360deg)}}
+.ob-vs{position:relative;display:flex;align-items:center;justify-content:center;gap:6px;height:190px;width:100%}
+.ob-vs-card{width:110px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:14px}
+.ob-vs-card .holo-card{border-radius:4.5%/3.3%;box-shadow:0 10px 18px #0007}
+.ob-vs-card.left{animation:ob-slam-left .55s cubic-bezier(.2,1.4,.4,1) both}
+.ob-vs-card.right{animation:ob-slam-right .55s cubic-bezier(.2,1.4,.4,1) .12s both}
+@keyframes ob-slam-left{from{transform:translateX(-160px) rotate(-25deg);opacity:0}}
+@keyframes ob-slam-right{from{transform:translateX(160px) rotate(25deg);opacity:0}}
+.ob-vs-flash{font-size:46px;color:#ffd24a;text-shadow:3px 0 0 #3b1d0e,-3px 0 0 #3b1d0e,0 3px 0 #3b1d0e,0 -3px 0 #3b1d0e,0 6px 0 #3b1d0e;animation:ob-pop .5s .45s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes ob-pop{from{transform:scale(0) rotate(-20deg)}}
+.ob-pack{width:150px;margin:4px auto}
+.ob-pack img{width:100%;filter:drop-shadow(0 12px 18px #0008)}
+.ob-pack.shaking img{animation:ob-shake .5s ease-in-out infinite}
+@keyframes ob-shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg) scale(1.03)}75%{transform:rotate(6deg) scale(1.03)}}
+.ob-burst{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 40%,#fff8 0,#ffd36a55 25%,transparent 60%);animation:ob-flash 1s ease-out both}
+@keyframes ob-flash{from{opacity:1}to{opacity:0}}
+.ob-reveal-title{font-size:34px!important;color:#e8901a;text-shadow:0 3px 0 #3b1d0e}
+.ob-reveal{position:relative;height:170px;width:100%;display:flex;justify-content:center;align-items:flex-end}
+.ob-reveal-card{position:absolute;bottom:0;width:100px;transform-origin:50% 120%;transform:rotate(calc(var(--i)*14deg));animation:start-deal .8s cubic-bezier(.2,.9,.25,1.2) both;animation-delay:calc((var(--i) + 1)*120ms);filter:drop-shadow(0 10px 16px #0008)}
+.ob-reveal-card .holo-card{border-radius:4.5%/3.3%}
+.qm-card{position:relative;overflow:hidden}
+.ob-battle{position:fixed;inset:0;z-index:160;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:calc(12px + env(safe-area-inset-top)) 12px calc(28px + env(safe-area-inset-bottom));background:#090a22 url(/arena/night-battle.svg) center/cover no-repeat;font-family:"Lilita One",system-ui,sans-serif;color:#fff}
+.ob-battle-top{width:100%;max-width:560px;display:flex;justify-content:space-between;align-items:center;font-size:14px;letter-spacing:.06em;color:#ffcf8a}
+.ob-loading{margin:auto;font-size:20px}
+.ob-row{display:flex;gap:12px;justify-content:center;width:100%;max-width:560px}
+.ob-slot{position:relative;width:min(28vw,150px);display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .2s}
+.ob-slot img{width:100%;border-radius:6px;box-shadow:0 10px 18px #0008}
+.ob-row.theirs .ob-slot.attacking{animation:ob-lunge-down .38s ease-out}
+.ob-row.mine .ob-slot.attacking{animation:ob-lunge-up .38s ease-out}
+@keyframes ob-lunge-down{50%{transform:translateY(46px) scale(1.06)}}
+@keyframes ob-lunge-up{50%{transform:translateY(-46px) scale(1.06)}}
+.ob-slot.hit img{animation:ob-hit .38s ease-out}
+@keyframes ob-hit{25%{transform:translateX(-7px);filter:brightness(2) saturate(.3)}50%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.ob-slot.fainted img{filter:grayscale(1) brightness(.5);transform:rotate(-6deg)}
+.ob-hp{width:100%;height:9px;border-radius:99px;background:#00000066;border:2px solid #3b1d0e;overflow:hidden}
+.ob-hp i{display:block;height:100%;background:linear-gradient(#7be38f,#39b25a);transition:width .3s}
+.ob-hp i.low{background:linear-gradient(#ff8f7a,#d9442a)}
+.ob-dmg{position:absolute;top:30%;left:50%;transform:translateX(-50%);font-size:30px;color:#fff;text-shadow:2px 0 0 #3b1d0e,-2px 0 0 #3b1d0e,0 2px 0 #3b1d0e,0 -2px 0 #3b1d0e,0 4px 0 #3b1d0e;animation:ob-float .7s ease-out both;white-space:nowrap}
+.ob-dmg.crit{color:#ffd24a;font-size:38px}
+@keyframes ob-float{from{opacity:0;transform:translate(-50%,10px) scale(.6)}30%{opacity:1;transform:translate(-50%,-6px) scale(1.15)}to{opacity:0;transform:translate(-50%,-34px)}}
+.ob-mid{font-size:18px;letter-spacing:.2em;color:#ffcf8a;text-shadow:0 2px 0 #3b1d0e}
