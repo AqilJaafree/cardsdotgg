@@ -14,7 +14,7 @@ import cardsJson from "./shared/cards.json";
 import rateSourcesJson from "./shared/rate-sources.json";
 import type { Abi } from "viem";
 
-export const A = addressesJson as Record<string, string>;
+export const A = addressesJson as unknown as Record<string, string>;
 export const deployed = !!A.arena;
 export const ad = (k: string) => A[k] as `0x${string}`;
 export const abis = {
