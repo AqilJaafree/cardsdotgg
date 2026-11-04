@@ -1,6 +1,6 @@
 import { defineChain, http, fallback } from "viem";
-import { createConfig } from "wagmi";
-import { injected } from "wagmi/connectors";
+// Privy's createConfig: wallets come from Privy login (Google embedded wallet or an external wallet), not wagmi connectors.
+import { createConfig } from "@privy-io/wagmi";
 
 export const monadTestnet = defineChain({
   id: 10143,
@@ -17,7 +17,6 @@ export const FALLBACK_RPC = "https://rpc.ankr.com/monad_testnet";
 
 export const wagmiConfig = createConfig({
   chains: [monadTestnet],
-  connectors: [injected()],
   transports: {
     [monadTestnet.id]: fallback([http("https://testnet-rpc.monad.xyz", { batch: true }), http(FALLBACK_RPC, { batch: true })]),
   },
