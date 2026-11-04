@@ -18,12 +18,12 @@
     "feePips": 100,
     "tickLower": 1182,
     "tickUpper": 1188,
-    "currentTick": 1178,
+    "currentTick": 1177,
     "inRange": false,
     "positionValueUsd": 4.13,
     "windowDays": 7,
     "samples": 168,
-    "tickMin": 1059,
+    "tickMin": 1061,
     "tickMax": 1185,
     "samplesInRange": 2,
     "intervalsInRange": 0,
@@ -31,8 +31,8 @@
       6,
       6
     ],
-    "readAt": "2026-11-04T10:39:08.274Z",
-    "mainnetBlock": "119305016"
+    "readAt": "2026-11-04T10:42:45.616Z",
+    "mainnetBlock": "119305735"
   },
   {
     "tier": 1,
@@ -53,26 +53,26 @@
     "feePips": 500,
     "tickLower": 198820,
     "tickUpper": 205750,
-    "currentTick": 198799,
+    "currentTick": 198803,
     "inRange": false,
     "positionValueUsd": 5,
     "windowDays": 7,
     "samples": 168,
     "tickMin": 198620,
-    "tickMax": 199344,
+    "tickMax": 199386,
     "samplesInRange": 143,
     "intervalsInRange": 138,
     "decimals": [
       6,
       18
     ],
-    "readAt": "2026-11-04T10:39:08.274Z",
-    "mainnetBlock": "119305016"
+    "readAt": "2026-11-04T10:42:45.616Z",
+    "mainnetBlock": "119305735"
   },
   {
     "tier": 2,
-    "bps": 2197,
-    "rawBps": 2197,
+    "bps": 2260,
+    "rawBps": 2260,
     "live": true,
     "source": "Uniswap V3 WMON/USDC position #49584",
     "sourceContract": "0x659bD0BC4167BA25c62E05656F78043E7eD4a9da",
@@ -88,20 +88,20 @@
     "feePips": 3000,
     "tickLower": -323220,
     "tickUpper": -316320,
-    "currentTick": -316317,
+    "currentTick": -316303,
     "inRange": false,
     "positionValueUsd": 5,
     "windowDays": 7,
     "samples": 168,
     "tickMin": -317131,
-    "tickMax": -314610,
+    "tickMax": -314587,
     "samplesInRange": 37,
-    "intervalsInRange": 35,
+    "intervalsInRange": 36,
     "decimals": [
       18,
       6
     ],
-    "readAt": "2026-11-04T10:39:08.274Z",
-    "mainnetBlock": "119305016"
+    "readAt": "2026-11-04T10:42:45.616Z",
+    "mainnetBlock": "119305735"
   }
 ]

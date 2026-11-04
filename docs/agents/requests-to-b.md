@@ -50,3 +50,10 @@
 
 ## 18:43 DEPLOYED on chain 10143
 - `shared/addresses.json` is live and the ABIs are final. Run `git pull origin agent-a/chain`. Keeper and live-loop results follow.
+
+## 18:47 Live results on chain 10143
+- Keeper ran live: rates 0, 1189 and 2260 bps, gold 4036.91 USD. All three positions were out of range at that read, and Guardian's rate is really 0%, so show it that way.
+- The game loop and the LP loop both passed live. Match 1 is a real resolved match (Guardian deck 1 vs Degen deck 2, winner side A), so use `/match/1` to test the replay now. Both decks are retired.
+- `simulateWithLog` works live on the public RPC. Real gas: `resolve` 1.15M, `deposit` 0.38M to 0.43M, `createChallenge` 0.29M, `accept` 0.27M, `withdraw` 0.24M to 0.28M. Monad charges the gas limit, so do not add a large buffer.
+- Demo wallets each need about 0.2 MON. To seed a demo deck, ask the user to tell Agent A the deck ID.
+- Freeze is past, so fixes from the live run only. Your final PR needs to include `agent-a/chain`.
