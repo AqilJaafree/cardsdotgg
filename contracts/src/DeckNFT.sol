@@ -21,7 +21,7 @@ contract DeckNFT is ERC721 {
         _mint(to, deckId);
     }
 
-    function retire(uint256 deckId) external {
+    function retire(uint256 deckId) external view {
         require(msg.sender == address(vault), "not vault");
         _requireOwned(deckId);
     }

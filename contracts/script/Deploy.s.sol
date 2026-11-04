@@ -17,6 +17,16 @@ contract Deploy is Script {
     uint256 constant ROUTER_TUSD = 1_000_000e6;
     uint256 constant ROUTER_GOLD = 1_000 ether;
 
+    BattleEngine engine;
+    TestToken tusd;
+    TestToken tgold;
+    RateOracle oracle;
+    DeckVault vault;
+    DeckNFT nft;
+    YieldEscrow escrow;
+    Arena arena;
+    WithdrawRouter router;
+
     function run() external {
         uint256 key = vm.envUint("DEPLOYER_PRIVATE_KEY");
         address deployer = vm.addr(key);
@@ -29,15 +39,15 @@ contract Deploy is Script {
         uint256 gold = vm.envOr("GOLD_PRICE_USD_1E6", uint256(4000e6));
 
         vm.startBroadcast(key);
-        BattleEngine engine = new BattleEngine();
-        TestToken tusd = new TestToken("Test USD (testnet)", "tUSD", 6, 1000e6, deployer);
-        TestToken tgold = new TestToken("Test Gold (testnet)", "tGOLD", 18, 0.5 ether, deployer);
-        RateOracle oracle = new RateOracle(deployer, keeper, rates, gold);
-        DeckVault vault = new DeckVault(deployer, tusd, tgold, oracle);
-        DeckNFT nft = new DeckNFT(vault);
-        YieldEscrow escrow = new YieldEscrow(deployer, tusd, vault, oracle);
-        Arena arena = new Arena(engine, vault, escrow);
-        WithdrawRouter router = new WithdrawRouter(tusd, tgold, vault, escrow, oracle);
+        engine = new BattleEngine();
+        tusd = new TestToken("Test USD (testnet)", "tUSD", 6, 1000e6, deployer);
+        tgold = new TestToken("Test Gold (testnet)", "tGOLD", 18, 0.5 ether, deployer);
+        oracle = new RateOracle(deployer, keeper, rates, gold);
+        vault = new DeckVault(deployer, tusd, tgold, oracle);
+        nft = new DeckNFT(vault);
+        escrow = new YieldEscrow(deployer, tusd, vault, oracle);
+        arena = new Arena(engine, vault, escrow);
+        router = new WithdrawRouter(tusd, tgold, vault, escrow, oracle);
         vault.wire(IVaultEscrow(address(escrow)), IVaultNFT(address(nft)), address(router));
         escrow.wire(address(arena), address(router));
         tusd.mint(deployer, RESERVE);
@@ -46,7 +56,10 @@ contract Deploy is Script {
         tusd.mint(address(router), ROUTER_TUSD);
         tgold.mint(address(router), ROUTER_GOLD);
         vm.stopBroadcast();
+        _write(deployer, keeper);
+    }
 
+    function _write(address deployer, address keeper) internal {
         string memory o = "addresses";
         vm.serializeUint(o, "chainId", block.chainid);
         vm.serializeAddress(o, "deployer", deployer);

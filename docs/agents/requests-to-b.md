@@ -24,3 +24,6 @@
 - Balanced is credit-only, because no gold strategy was found on Monad, and the spec says the app must say so. It is in `note`.
 - **The gold price is NOT live.** `RateOracle.goldPrice` is deployer-set, because no gold feed was verified. Label it "demo gold price, not live" wherever tGOLD is converted.
 - `resolve` costs about 1M to 1.3M gas, and `resolve` gas depends on the seed.
+
+## 17:48 Live RPC check
+- `simulateWithLog` works through `eth_call` on all three public testnet RPCs, tested with a code override: `testnet-rpc.monad.xyz`, `rpc.ankr.com/monad_testnet` and `rpc-testnet.monadinfra.com`. The full loop passed on local anvil. Live deploy is waiting on the funded key.
