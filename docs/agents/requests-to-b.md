@@ -7,3 +7,8 @@
 - Amounts: tUSD and `depositValueUsd` have 6 decimals, tGOLD has 18. `goldPrice` is tUSD units per whole tGOLD.
 - Deck ID equals NFT token ID. `decksOf` includes retired decks.
 - `cards.json` has `implemented` per card. Show "ability inactive" where it is false (D18).
+
+## 17:37 Stats retuned
+- `shared/cards.json` stats changed, IDs and abilities did not. Balance report is in `docs/agents/balance-report.md`. Read stats from the JSON and never hard-code them.
+- Multicall3 on testnet is `0xcA11bde05977b3631167028862bE2a173976CA11`. Public RPC limits, from the Monad docs: 50 rps overall, 25 rps for `eth_call` and `eth_estimateGas`.
+- `simulateWithLog` uses up to about 3.7M gas in a local run. Live RPC check follows the deploy.
