@@ -1,8 +1,8 @@
 [
   {
     "tier": 0,
-    "bps": 107,
-    "rawBps": 107,
+    "bps": 0,
+    "rawBps": 0,
     "live": true,
     "source": "Uniswap V3 EURW/USDC position #49582",
     "sourceContract": "0xe153201e40F50EBc9DA7Be3AA9C419f185C97F44",
@@ -18,26 +18,26 @@
     "feePips": 100,
     "tickLower": 1182,
     "tickUpper": 1188,
-    "currentTick": 1185,
-    "inRange": true,
+    "currentTick": 1178,
+    "inRange": false,
     "positionValueUsd": 4.13,
     "windowDays": 7,
     "samples": 168,
-    "tickMin": 1066,
+    "tickMin": 1059,
     "tickMax": 1185,
     "samplesInRange": 2,
-    "intervalsInRange": 1,
+    "intervalsInRange": 0,
     "decimals": [
       6,
       6
     ],
-    "readAt": "2026-11-04T10:28:36.093Z",
-    "mainnetBlock": "119302928"
+    "readAt": "2026-11-04T10:39:08.274Z",
+    "mainnetBlock": "119305016"
   },
   {
     "tier": 1,
-    "bps": 1248,
-    "rawBps": 1248,
+    "bps": 1189,
+    "rawBps": 1189,
     "live": true,
     "source": "Uniswap V4 USDC/WETH position #645141",
     "sourceContract": "0xad408916c1c310da9c258d4c128a7bf50fd9edc42a218cc970da39cfc8a05d93",
@@ -53,26 +53,26 @@
     "feePips": 500,
     "tickLower": 198820,
     "tickUpper": 205750,
-    "currentTick": 198792,
+    "currentTick": 198799,
     "inRange": false,
     "positionValueUsd": 5,
     "windowDays": 7,
     "samples": 168,
-    "tickMin": 198623,
-    "tickMax": 199386,
+    "tickMin": 198620,
+    "tickMax": 199344,
     "samplesInRange": 143,
-    "intervalsInRange": 139,
+    "intervalsInRange": 138,
     "decimals": [
       6,
       18
     ],
-    "readAt": "2026-11-04T10:28:36.093Z",
-    "mainnetBlock": "119302928"
+    "readAt": "2026-11-04T10:39:08.274Z",
+    "mainnetBlock": "119305016"
   },
   {
     "tier": 2,
-    "bps": 2413,
-    "rawBps": 2413,
+    "bps": 2197,
+    "rawBps": 2197,
     "live": true,
     "source": "Uniswap V3 WMON/USDC position #49584",
     "sourceContract": "0x659bD0BC4167BA25c62E05656F78043E7eD4a9da",
@@ -88,20 +88,20 @@
     "feePips": 3000,
     "tickLower": -323220,
     "tickUpper": -316320,
-    "currentTick": -316288,
+    "currentTick": -316317,
     "inRange": false,
     "positionValueUsd": 5,
     "windowDays": 7,
     "samples": 168,
-    "tickMin": -317154,
-    "tickMax": -314601,
-    "samplesInRange": 39,
-    "intervalsInRange": 37,
+    "tickMin": -317131,
+    "tickMax": -314610,
+    "samplesInRange": 37,
+    "intervalsInRange": 35,
     "decimals": [
       18,
       6
     ],
-    "readAt": "2026-11-04T10:28:36.093Z",
-    "mainnetBlock": "119302928"
+    "readAt": "2026-11-04T10:39:08.274Z",
+    "mainnetBlock": "119305016"
   }
 ]

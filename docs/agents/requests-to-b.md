@@ -47,3 +47,6 @@
 - Show each deck's position link and "source: Monad mainnet". Show `inRange` plainly: when it is false, say "out of range, not earning fees right now". WMON and WETH were both out of range at the last read.
 - The rate is what the position's price range was estimated to earn over the last 7 days. Do not say the position itself earned it. Show the `note` text. Balanced no longer has a credit or gold source, so remove that wording.
 - Still read the current rate from `RateOracle.rateOf`.
+
+## 18:43 DEPLOYED on chain 10143
+- `shared/addresses.json` is live and the ABIs are final. Run `git pull origin agent-a/chain`. Keeper and live-loop results follow.
