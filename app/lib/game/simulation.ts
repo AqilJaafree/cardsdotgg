@@ -1,7 +1,7 @@
 export type Fighter = { id: number; hp: number; maxHp: number; energy: number };
 export type Side = { active: Fighter; bench: Fighter[]; hand: number[]; points: number };
 export type BattleState = { player: Side; opponent: Side; turn: number; energyUsed: boolean; winner: "player" | "opponent" | null };
-const printedHp: Record<number, number> = { 1:80, 2:100, 3:120, 4:120, 5:40, 6:100, 7:70, 8:100, 9:60, 10:60, 11:90, 12:80, 13:90, 14:80, 15:100, 16:90, 17:80, 20:70, 21:80, 22:80, 27:50, 30:60, 44:40, 58:40 };
+const printedHp: Record<number, number> = { 1:80, 2:100, 3:120, 4:120, 5:40, 6:100, 7:70, 8:100, 9:60, 10:60, 11:90, 12:80, 13:90, 14:80, 15:100, 16:90, 17:80, 20:70, 21:80, 22:60, 27:50, 30:60, 44:40, 58:40 };
 export const fighter = (id: number): Fighter => ({ id, hp: printedHp[id] ?? 70, maxHp: printedHp[id] ?? 70, energy: 1 });
 const makeSide = (ids: readonly number[]): Side => ({ active: fighter(ids[0]), bench: ids.slice(1,4).map(fighter), hand: ids.slice(4), points: 0 });
 export function newBattle(player: readonly number[], opponent: readonly number[]): BattleState {

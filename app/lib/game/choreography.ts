@@ -15,11 +15,11 @@ export const battleTiming = {
 
 const moves: Record<number, string> = {
   1: "Confuse Ray", 2: "Hydro Pump", 3: "Double-edge", 4: "Fire Spin",
-  5: "Metronome", 6: "Dragon Rage", 7: "Thunderpunch", 8: "Jab",
-  9: "Thunder Wave", 10: "Psychic", 11: "Water Gun", 12: "Agility",
-  13: "Water Gun", 14: "Thunder", 15: "Solar Beam", 16: "Whirlwind",
-  17: "Twineedle", 20: "Scrunch", 21: "Selfdestruct", 22: "Foul Gas",
-  27: "Meditate", 30: "Vine Whip", 44: "Leech Seed", 58: "Thundershock",
+  5: "Metronome", 6: "Dragon Rage", 7: "Jab", 8: "Seismic Toss",
+  9: "Thunder Wave", 10: "Psychic", 11: "Thrash", 12: "Fire Blast",
+  13: "Water Gun", 14: "Thunder", 15: "Solarbeam", 16: "Thunderbolt",
+  17: "Twineedle", 20: "Thunderpunch", 21: "Electric Shock", 22: "Whirlwind",
+  27: "Pot Smash", 30: "Vine Whip", 44: "Leech Seed", 58: "Thundershock",
 };
 export const moveName = (id: number) => moves[id] ?? "Tackle";
 export type AttackCue = { id: number; cardId: number; side: "player" | "opponent"; tier: number; strong: boolean };
