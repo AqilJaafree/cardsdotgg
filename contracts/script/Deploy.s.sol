@@ -17,7 +17,6 @@ contract Deploy is Script {
     uint256 constant RESERVE = 1_000_000e6;
     uint256 constant ROUTER_TUSD = 1_000_000e6;
     uint256 constant ROUTER_GOLD = 1_000 ether;
-    uint256 constant POOL_GOLD = 10 ether;
 
     BattleEngine engine;
     TestToken tusd;
@@ -39,7 +38,8 @@ contract Deploy is Script {
             uint16(vm.envOr("RATE_BALANCED_BPS", uint256(800))),
             uint16(vm.envOr("RATE_DEGEN_BPS", uint256(1500)))
         ];
-        uint256 gold = vm.envOr("GOLD_PRICE_USD_1E6", uint256(4000e6));
+        uint256 gold = vm.envUint("GOLD_PRICE_USD_1E6");
+        uint256 poolValue = vm.envUint("POOL_VALUE_USD_1E6");
 
         vm.startBroadcast(key);
         engine = new BattleEngine();
@@ -58,14 +58,15 @@ contract Deploy is Script {
         escrow.fundReserve(RESERVE);
         tusd.mint(address(router), ROUTER_TUSD);
         tgold.mint(address(router), ROUTER_GOLD);
-        // Opening pool price is the deployer-set gold price, which is not a live price.
+        // Opens at the mainnet pool's price and total value, split evenly, in test tokens (shared/liquidity-source.json).
         pool = new LiquidityPool(tusd, tgold);
-        uint256 poolUsd = (POOL_GOLD * gold) / 1e18;
+        uint256 poolUsd = poolValue / 2;
+        uint256 poolGold = (poolUsd * 1e18) / gold;
         tusd.mint(deployer, poolUsd);
-        tgold.mint(deployer, POOL_GOLD);
+        tgold.mint(deployer, poolGold);
         tusd.approve(address(pool), poolUsd);
-        tgold.approve(address(pool), POOL_GOLD);
-        pool.addLiquidity(poolUsd, POOL_GOLD, poolUsd, POOL_GOLD);
+        tgold.approve(address(pool), poolGold);
+        pool.addLiquidity(poolUsd, poolGold, poolUsd, poolGold);
         vm.stopBroadcast();
         _write(deployer, keeper);
     }

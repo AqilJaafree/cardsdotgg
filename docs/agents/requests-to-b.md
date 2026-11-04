@@ -34,3 +34,10 @@
 - Fees stay in the reserves, so there is nothing to claim. Do not show a fee APR, since the contract does not track one. `positionOf` values also move with the pool price.
 - Label it honestly: testnet tokens, fees come only from swaps on this pool, and the opening price is the deployer-set demo gold price, not a market price.
 - The rest of your scope is unchanged. Deploy needs about 17.4M gas.
+
+## 18:01 Real liquidity data, requested by the user. Replaces the 17:46 and 17:57 gold labels
+- New `shared/liquidity-source.json`, read from Monad mainnet: PancakeSwap V3 XAUt0/USDT0 pool. Fields include `usdPerGold1e6, goldReserve, goldDecimals, quoteReserve, quoteDecimals, reserveValueUsd1e6, feePips, volume24hUsd, volumeSource, sourceContract, note, readAt, mainnetBlock`.
+- `RateOracle.goldPrice` now comes from this pool through the keeper, and the testnet pool opens at this price and total value, split evenly. Drop the "demo gold price" label. Show "source: Monad mainnet", the pool address and `readAt`.
+- It is a one-time read per keeper run, not a live stream, so always show `readAt`.
+- Pool page: show the mainnet data as a clearly separate "Mainnet reference" panel. `reserves()` and `positionOf()` are the testnet pool and test tokens. Never present mainnet reserves or volume as this pool's own, and do not derive an APR from them.
+- Still label it: testnet tokens, thin mainnet pool, fees here come only from swaps on this pool. The testnet pool's price moves with its own swaps and does not follow mainnet.
